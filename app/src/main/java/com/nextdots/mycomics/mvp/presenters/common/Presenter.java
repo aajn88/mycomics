@@ -2,7 +2,7 @@ package com.nextdots.mycomics.mvp.presenters.common;
 
 import android.app.Activity;
 
-import com.nextdots.mycomics.mvp.views.common.IComponent;
+import com.nextdots.mycomics.mvp.views.common.Component;
 
 /**
  * Delivery Presenter that is implemented by all Presenters that want to interact with the
@@ -10,7 +10,7 @@ import com.nextdots.mycomics.mvp.views.common.IComponent;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public interface IPresenter {
+public interface Presenter {
 
   /**
    * This method should be called in {@link Activity#onStart()} method. This initializes the
@@ -30,5 +30,5 @@ public interface IPresenter {
    * @param activity
    *         New context of the presenter
    */
-  void onContextChanged(IComponent activity);
+  void onContextChanged(Component activity);
 }

@@ -1,5 +1,6 @@
 package com.nextdots.mycomics.mvp.presenters.login;
 
+import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.mvp.presenters.common.AbstractPresenter;
 
 /**
@@ -9,6 +10,19 @@ import com.nextdots.mycomics.mvp.presenters.common.AbstractPresenter;
  * @since 15/12/16
  */
 public class LoginPresenter extends AbstractPresenter {
+
+  private final SessionInteractor mSessionInteractor;
+
+  /**
+   * Login presenter constructor
+   *
+   * @param sessionInteractor
+   *         Session interactor needed to manage sign in processes
+   */
+  public LoginPresenter(SessionInteractor sessionInteractor) {
+    this.mSessionInteractor = sessionInteractor;
+  }
+
   @Override
   public void start() {
 

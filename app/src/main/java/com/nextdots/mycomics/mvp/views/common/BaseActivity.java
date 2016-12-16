@@ -25,12 +25,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.config.MyComicsApplication;
 import com.nextdots.mycomics.config.di.DiComponent;
-import com.nextdots.mycomics.exceptions.MyComicsException;
-import com.nextdots.mycomics.mvp.presenters.common.IPresenter;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nextdots.mycomics.mvp.presenters.common.Presenter;
 
 import butterknife.ButterKnife;
 
@@ -42,8 +40,8 @@ import butterknife.ButterKnife;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public abstract class BaseActivity<T extends IPresenter> extends AppCompatActivity
-        implements IComponent<T> {
+public abstract class BaseActivity<T extends Presenter> extends AppCompatActivity
+        implements Component<T> {
 
   /** Tag for logs **/
   private static final String TAG = BaseActivity.class.getSimpleName();
@@ -55,11 +53,6 @@ public abstract class BaseActivity<T extends IPresenter> extends AppCompatActivi
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     injectComponent(injector());
-
-    ImageLoader imageLoader = ImageLoader.getInstance();
-    if (!imageLoader.isInited()) {
-      imageLoader.init(ImageLoaderConfiguration.createDefault(this));
-    }
   }
 
   @Override

@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.nextdots.mycomics.R;
+import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.login.LoginPresenter;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
+
+import javax.inject.Inject;
 
 /**
  * Login activity that shows Facebook and Google login
@@ -15,6 +18,9 @@ import com.nextdots.mycomics.mvp.views.common.BaseActivity;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
 public class LoginActivity extends BaseActivity<LoginPresenter> {
+
+  @Inject
+  SessionInteractor mSessionInteractor;
 
   /**
    * Start Login activity given a context
@@ -39,6 +45,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> {
 
   @Override
   public LoginPresenter buildPresenter() {
-    return new LoginPresenter();
+    return new LoginPresenter(mSessionInteractor);
   }
 }

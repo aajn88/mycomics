@@ -15,7 +15,7 @@
  */
 package com.nextdots.mycomics.mvp.presenters.common;
 
-import com.nextdots.mycomics.mvp.views.common.IComponent;
+import com.nextdots.mycomics.mvp.views.common.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ import java.util.Map;
 public class PresenterHolder {
 
   /** The data structure that keeps the presenters associated to the views for access */
-  private Map<String, IPresenter> mPresenters = new HashMap<>();
+  private Map<String, Presenter> mPresenters = new HashMap<>();
 
   /**
    * This method return the presenter associated to a View
@@ -39,11 +39,11 @@ public class PresenterHolder {
    *
    * @return the presenter associated to that view (Component)
    */
-  public IPresenter get(IComponent component) {
+  public Presenter get(Component component) {
     if (!has(component)) {
       hold(component);
     }
-    IPresenter presenter = getPresenter(component);
+    Presenter presenter = getPresenter(component);
     presenter.onContextChanged(component);
     return presenter;
   }
@@ -54,9 +54,9 @@ public class PresenterHolder {
    * @param component
    *         Component to be searched
    *
-   * @return IPresenter instance. Null if there is no a match
+   * @return Presenter instance. Null if there is no a match
    */
-  private IPresenter getPresenter(IComponent component) {
+  private Presenter getPresenter(Component component) {
     return mPresenters.get(component.key());
   }
 
@@ -66,7 +66,7 @@ public class PresenterHolder {
    * @param component
    *         the component that going to be bounded to the presenter
    */
-  public void hold(IComponent component) {
+  public void hold(Component component) {
     mPresenters.put(component.key(), component.buildPresenter());
   }
 
@@ -78,7 +78,7 @@ public class PresenterHolder {
    *
    * @return true if exists a presenter associated, otherwise return false
    */
-  public boolean has(IComponent component) {
+  public boolean has(Component component) {
     return component != null && mPresenters.containsKey(component.key());
   }
 
@@ -88,7 +88,7 @@ public class PresenterHolder {
    * @param newContext
    *         The new context
    */
-  public void onContextChanged(IComponent newContext) {
+  public void onContextChanged(Component newContext) {
     if (!has(newContext)) {
       return;
     }
@@ -101,7 +101,7 @@ public class PresenterHolder {
    * @param component
    *         the component that going to unbound the presenter associated
    */
-  public void unhold(IComponent component) {
+  public void unhold(Component component) {
     mPresenters.remove(component.key());
   }
 }

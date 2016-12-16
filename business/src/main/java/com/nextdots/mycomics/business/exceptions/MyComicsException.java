@@ -1,8 +1,9 @@
-package com.nextdots.mycomics.exceptions;
+package com.nextdots.mycomics.business.exceptions;
 
 import android.support.annotation.StringRes;
 
-import com.nextdots.mycomics.R;
+import com.nextdots.mycomics.business.R;
+
 
 /**
  * Generic exception for UI handle
