@@ -1,6 +1,7 @@
 package com.nextdots.mycomics.config.di;
 
-import com.nextdots.mycomics.mvp.views.MainActivity;
+import com.nextdots.mycomics.mvp.views.launch.MainActivity;
+import com.nextdots.mycomics.mvp.views.login.LoginActivity;
 
 import javax.inject.Singleton;
 
@@ -17,4 +18,7 @@ public interface DiComponent {
 
   /** The movies activity **/
   void inject(MainActivity moviesActivity);
+
+  /** Login activity **/
+  void inject(LoginActivity loginActivity);
 }

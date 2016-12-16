@@ -1,3 +1,7 @@
 <resources>
   <string name="app_name">My Comics</string>
+
+  <!-- Images description -->
+  <string name="logo_description">My comics logo</string>
+
 </resources>

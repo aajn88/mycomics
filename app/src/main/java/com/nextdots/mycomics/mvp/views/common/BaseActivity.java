@@ -100,7 +100,7 @@ public abstract class BaseActivity<T extends IPresenter> extends AppCompatActivi
    */
   @Override
   public MyComicsApplication getApplicationContext() {
-    return (MyComicsApplication) super.getApplicationContext();
+    return (MyComicsApplication) super.getApplication();
   }
 
   /**
