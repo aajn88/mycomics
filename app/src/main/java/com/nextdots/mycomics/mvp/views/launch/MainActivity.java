@@ -7,10 +7,10 @@ import android.widget.ImageView;
 
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.config.di.DiComponent;
-import com.nextdots.mycomics.mvp.presenters.launch.ISplashView;
+import com.nextdots.mycomics.mvp.presenters.launch.SplashView;
 import com.nextdots.mycomics.mvp.presenters.launch.SplashPresenter;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
-import com.nextdots.mycomics.mvp.views.login.LoginActivity;
+import com.nextdots.mycomics.mvp.views.login.SignInActivity;
 import com.nextdots.mycomics.utils.AnimationUtils;
 
 import butterknife.BindView;
@@ -20,7 +20,7 @@ import butterknife.BindView;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public class MainActivity extends BaseActivity<SplashPresenter> implements ISplashView {
+public class MainActivity extends BaseActivity<SplashPresenter> implements SplashView {
 
   /** Constant for animations duration **/
   private static final int ANIM_DURATION = 500;
@@ -66,6 +66,6 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements ISpla
 
   @Override
   public void redirectToLogin() {
-    LoginActivity.start(this);
+    SignInActivity.start(this);
   }
 }

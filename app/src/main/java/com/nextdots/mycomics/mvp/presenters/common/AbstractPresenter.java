@@ -15,17 +15,17 @@
  */
 package com.nextdots.mycomics.mvp.presenters.common;
 
-import com.nextdots.mycomics.mvp.views.common.IComponent;
+import com.nextdots.mycomics.mvp.views.common.Component;
 
 /**
  * The abstract presenter that implements common and standard methods for reuse if needed
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public abstract class AbstractPresenter implements IPresenter {
+public abstract class AbstractPresenter implements Presenter {
 
   @Override
-  public void onContextChanged(IComponent activity) {
+  public void onContextChanged(Component activity) {
     // Here comes what presenter should do in case of a context change
   }
 }

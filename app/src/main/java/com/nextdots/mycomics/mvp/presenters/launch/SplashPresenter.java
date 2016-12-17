@@ -12,7 +12,7 @@ import com.nextdots.mycomics.mvp.presenters.common.AbstractPresenter;
 public class SplashPresenter extends AbstractPresenter {
 
   /** The splash view instance **/
-  private ISplashView mView;
+  private SplashView mView;
 
   /** Constant for animation delay **/
   private static final int ANIM_DELAY = 500;
@@ -26,7 +26,7 @@ public class SplashPresenter extends AbstractPresenter {
    * @param splashView
    *         Splash view instance
    */
-  public SplashPresenter(ISplashView splashView) {
+  public SplashPresenter(SplashView splashView) {
     this.mView = splashView;
   }
 

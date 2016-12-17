@@ -5,7 +5,7 @@ package com.nextdots.mycomics.mvp.presenters.launch;
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public interface ISplashView {
+public interface SplashView {
 
   /**
    * Renders the splash animation and related views

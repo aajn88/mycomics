@@ -2,11 +2,18 @@ package com.nextdots.mycomics.config;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.nextdots.mycomics.config.di.DaggerDiComponent;
 import com.nextdots.mycomics.config.di.DiComponent;
-import com.nextdots.mycomics.mvp.presenters.common.IPresenter;
+import com.nextdots.mycomics.config.di.modules.CommonModule;
+import com.nextdots.mycomics.config.di.modules.InteractorsModule;
+import com.nextdots.mycomics.config.di.modules.ProvidersModule;
+import com.nextdots.mycomics.mvp.presenters.common.Presenter;
 import com.nextdots.mycomics.mvp.presenters.common.PresenterHolder;
-import com.nextdots.mycomics.mvp.views.common.IComponent;
+import com.nextdots.mycomics.mvp.views.common.Component;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * This is the MyComics application where configuration and common process are made
@@ -26,9 +33,32 @@ public class MyComicsApplication extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
+    enableFacebook();
     mPresenterHolder = new PresenterHolder();
-    mDiComponent = DaggerDiComponent.builder()
+    mDiComponent = DaggerDiComponent.builder().
+            commonModule(new CommonModule(this))
+            .interactorsModule(new InteractorsModule())
+            .providersModule(new ProvidersModule())
             .build();
+    enableImageLoader();
+  }
+
+  /**
+   * Enables image loader for the whole application
+   */
+  private void enableImageLoader() {
+    ImageLoader imageLoader = ImageLoader.getInstance();
+    if (!imageLoader.isInited()) {
+      imageLoader.init(ImageLoaderConfiguration.createDefault(this));
+    }
+  }
+
+  /**
+   * Enables facebook features
+   */
+  private void enableFacebook() {
+    FacebookSdk.sdkInitialize(getApplicationContext());
+    AppEventsLogger.activateApp(this);
   }
 
   /**
@@ -39,7 +69,7 @@ public class MyComicsApplication extends Application {
    *
    * @return the presenter used for the view
    */
-  public IPresenter getPresenter(IComponent component) {
+  public Presenter getPresenter(Component component) {
     return mPresenterHolder.get(component);
   }
 
@@ -49,7 +79,7 @@ public class MyComicsApplication extends Application {
    * @param component
    *         Activity to be unbound
    */
-  public void unbindPresenter(IComponent component) {
+  public void unbindPresenter(Component component) {
     mPresenterHolder.unhold(component);
   }
 
@@ -59,7 +89,7 @@ public class MyComicsApplication extends Application {
    * @param component
    *         Component to be unbound
    */
-  public void onPresenterContextChanged(IComponent component) {
+  public void onPresenterContextChanged(Component component) {
     mPresenterHolder.onContextChanged(component);
   }
 

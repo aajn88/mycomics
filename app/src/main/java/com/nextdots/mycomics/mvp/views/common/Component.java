@@ -1,13 +1,13 @@
 package com.nextdots.mycomics.mvp.views.common;
 
-import com.nextdots.mycomics.mvp.presenters.common.IPresenter;
+import com.nextdots.mycomics.mvp.presenters.common.Presenter;
 
 /**
  * This interface identifies the Delivery UI Components such as Activities and Fragments
  *
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
-public interface IComponent<T extends IPresenter> {
+public interface Component<T extends Presenter> {
 
   /**
    * This method gets an instance of the respective presenter of the component
