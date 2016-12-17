@@ -2,8 +2,6 @@ package com.nextdots.mycomics.common.session;
 
 import com.nextdots.mycomics.common.providers.Provider;
 
-import java.util.Date;
-
 /**
  * This class contains user's basic information and session data
  *
@@ -30,11 +28,8 @@ public class User {
   /** Session provider **/
   private Provider sessionProvider;
 
-  /** Session token **/
-  private String sessionToken;
-
-  /** Expiration date **/
-  private Date expirationDate;
+  /** Session token information **/
+  private SessionToken sessionToken;
 
   /**
    * @return the id
@@ -135,7 +130,7 @@ public class User {
   /**
    * @return the sessionToken
    */
-  public String getSessionToken() {
+  public SessionToken getSessionToken() {
     return sessionToken;
   }
 
@@ -143,24 +138,21 @@ public class User {
    * @param sessionToken
    *         the sessionToken to set
    */
-  public User setSessionToken(String sessionToken) {
+  public User setSessionToken(SessionToken sessionToken) {
     this.sessionToken = sessionToken;
     return this;
   }
 
-  /**
-   * @return the expirationDate
-   */
-  public Date getExpirationDate() {
-    return expirationDate;
-  }
-
-  /**
-   * @param expirationDate
-   *         the expirationDate to set
-   */
-  public User setExpirationDate(Date expirationDate) {
-    this.expirationDate = expirationDate;
-    return this;
+  @Override
+  public String toString() {
+    return "User{" +
+            "id=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", picture='" + picture + '\'' +
+            ", sessionProvider=" + sessionProvider +
+            ", sessionToken=" + sessionToken +
+            '}';
   }
 }

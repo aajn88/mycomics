@@ -10,7 +10,7 @@ import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.launch.SplashView;
 import com.nextdots.mycomics.mvp.presenters.launch.SplashPresenter;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
-import com.nextdots.mycomics.mvp.views.login.LoginActivity;
+import com.nextdots.mycomics.mvp.views.login.SignInActivity;
 import com.nextdots.mycomics.utils.AnimationUtils;
 
 import butterknife.BindView;
@@ -66,6 +66,6 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
 
   @Override
   public void redirectToLogin() {
-    LoginActivity.start(this);
+    SignInActivity.start(this);
   }
 }

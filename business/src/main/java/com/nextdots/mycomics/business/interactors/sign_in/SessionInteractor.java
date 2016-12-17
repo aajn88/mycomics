@@ -3,7 +3,7 @@ package com.nextdots.mycomics.business.interactors.sign_in;
 import android.support.annotation.NonNull;
 
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
-import com.nextdots.mycomics.business.providers.Provider;
+import com.nextdots.mycomics.common.providers.Provider;
 
 /**
  * Session interactor that manages all session information and login with corresponding providers

@@ -4,7 +4,7 @@ import com.nextdots.mycomics.config.di.modules.CommonModule;
 import com.nextdots.mycomics.config.di.modules.InteractorsModule;
 import com.nextdots.mycomics.config.di.modules.ProvidersModule;
 import com.nextdots.mycomics.mvp.views.launch.MainActivity;
-import com.nextdots.mycomics.mvp.views.login.LoginActivity;
+import com.nextdots.mycomics.mvp.views.login.SignInActivity;
 
 import javax.inject.Singleton;
 
@@ -23,5 +23,5 @@ public interface DiComponent {
   void inject(MainActivity moviesActivity);
 
   /** Login activity **/
-  void inject(LoginActivity loginActivity);
+  void inject(SignInActivity signInActivity);
 }

@@ -1,9 +1,13 @@
 package com.nextdots.mycomics.business.providers.sign_in.facebook;
 
 import android.content.Context;
+import android.net.Uri;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
+import com.nextdots.mycomics.common.providers.Provider;
+import com.nextdots.mycomics.common.session.SessionToken;
+import com.nextdots.mycomics.common.session.User;
 
 /**
  * Implementation of the {@link FacebookProvider} to perform specific actions such as sign in
@@ -37,17 +41,29 @@ public class FacebookProviderImpl implements FacebookProvider,
   }
 
   @Override
-  public void onFacebookAccessSuccess(Profile profile, AccessToken accessToken) {
-    // TODO: Parse profile and access token into User
+  public void onFacebookAccessSuccess(Profile profile, String email, AccessToken accessToken) {
+    int dimensionPixelSize = mContext.getResources()
+            .getDimensionPixelSize(
+                    com.facebook.R.dimen.com_facebook_profilepictureview_preset_size_large);
+    Uri pictureUri = profile.getProfilePictureUri(dimensionPixelSize, dimensionPixelSize);
+    User user = new User().
+            setFirstName(profile.getFirstName())
+            .setLastName(profile.getLastName())
+            .setEmail(email)
+            .setPicture(pictureUri.toString())
+            .setSessionProvider(Provider.FACEBOOK)
+            .setSessionToken(new SessionToken(profile.getId(), accessToken.getToken(),
+                    accessToken.getExpires()));
+    mSignInCallback.signInSuccess(user);
   }
 
   @Override
-  public void onFacebookAccessCanceled() {
-
+  public void onFacebookAccessCancelled() {
+    mSignInCallback.signInFailure(new Throwable("Facebook sign in was cancelled"));
   }
 
   @Override
-  public void onFacebookAccessFailure(Throwable e) {
-
+  public void onFacebookAccessFailure(Throwable t) {
+    mSignInCallback.signInFailure(t);
   }
 }

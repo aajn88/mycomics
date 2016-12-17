@@ -43,22 +43,24 @@ public interface FacebookAccess {
      *
      * @param profile
      *         Facebook profile
+     * @param email
+     *         User's email
      * @param accessToken
      *         with the data for execute queries to facebook about the user
      */
-    void onFacebookAccessSuccess(Profile profile, AccessToken accessToken);
+    void onFacebookAccessSuccess(Profile profile, String email, AccessToken accessToken);
 
     /**
      * This method communicate if the facebook process was cancelled
      */
-    void onFacebookAccessCanceled();
+    void onFacebookAccessCancelled();
 
     /**
      * This method communicate any failure in the accessToken process with Facebook
      *
-     * @param e
+     * @param t
      *         The exception that describe the error
      */
-    void onFacebookAccessFailure(Throwable e);
+    void onFacebookAccessFailure(Throwable t);
   }
 }
