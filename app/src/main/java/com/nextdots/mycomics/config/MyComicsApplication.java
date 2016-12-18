@@ -8,6 +8,7 @@ import com.nextdots.mycomics.config.di.DaggerDiComponent;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.config.di.modules.CommonModule;
 import com.nextdots.mycomics.config.di.modules.InteractorsModule;
+import com.nextdots.mycomics.config.di.modules.PersistenceModule;
 import com.nextdots.mycomics.config.di.modules.ProvidersModule;
 import com.nextdots.mycomics.mvp.presenters.common.Presenter;
 import com.nextdots.mycomics.mvp.presenters.common.PresenterHolder;
@@ -39,6 +40,7 @@ public class MyComicsApplication extends Application {
             commonModule(new CommonModule(this))
             .interactorsModule(new InteractorsModule())
             .providersModule(new ProvidersModule())
+            .persistenceModule(new PersistenceModule())
             .build();
     enableImageLoader();
   }

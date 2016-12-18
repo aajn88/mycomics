@@ -1,4 +1,4 @@
-package com.nextdots.mycomics.common.session;
+package com.nextdots.mycomics.common.model.session;
 
 import java.io.Serializable;
 import java.util.Date;

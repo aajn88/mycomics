@@ -1,5 +1,7 @@
-package com.nextdots.mycomics.common.session;
+package com.nextdots.mycomics.common.model.session;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 import com.nextdots.mycomics.common.providers.Provider;
 
 /**
@@ -11,24 +13,31 @@ import com.nextdots.mycomics.common.providers.Provider;
 public class User {
 
   /** Local user's ID **/
+  @DatabaseField(generatedId = true)
   private int id;
 
   /** User's first name **/
+  @DatabaseField(canBeNull = false)
   private String firstName;
 
   /** User's last name **/
+  @DatabaseField(canBeNull = false)
   private String lastName;
 
   /** User's email **/
+  @DatabaseField(canBeNull = false)
   private String email;
 
   /** User's picture **/
+  @DatabaseField
   private String picture;
 
   /** Session provider **/
+  @DatabaseField(canBeNull = false, dataType = DataType.ENUM_STRING)
   private Provider sessionProvider;
 
   /** Session token information **/
+  @DatabaseField(dataType = DataType.SERIALIZABLE)
   private SessionToken sessionToken;
 
   /**

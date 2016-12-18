@@ -2,6 +2,7 @@ package com.nextdots.mycomics.config.di;
 
 import com.nextdots.mycomics.config.di.modules.CommonModule;
 import com.nextdots.mycomics.config.di.modules.InteractorsModule;
+import com.nextdots.mycomics.config.di.modules.PersistenceModule;
 import com.nextdots.mycomics.config.di.modules.ProvidersModule;
 import com.nextdots.mycomics.mvp.views.launch.MainActivity;
 import com.nextdots.mycomics.mvp.views.login.SignInActivity;
@@ -16,7 +17,8 @@ import dagger.Component;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  */
 @Singleton
-@Component(modules = {CommonModule.class, InteractorsModule.class, ProvidersModule.class})
+@Component(modules = {CommonModule.class, InteractorsModule.class, ProvidersModule.class,
+        PersistenceModule.class})
 public interface DiComponent {
 
   /** The movies activity **/

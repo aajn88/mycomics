@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.nextdots.mycomics.common.providers.Provider;
-import com.nextdots.mycomics.common.session.SessionToken;
-import com.nextdots.mycomics.common.session.User;
+import com.nextdots.mycomics.common.model.session.SessionToken;
+import com.nextdots.mycomics.common.model.session.User;
 
 /**
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>

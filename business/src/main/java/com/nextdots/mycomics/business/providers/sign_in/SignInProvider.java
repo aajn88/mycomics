@@ -1,6 +1,6 @@
 package com.nextdots.mycomics.business.providers.sign_in;
 
-import com.nextdots.mycomics.common.session.User;
+import com.nextdots.mycomics.common.model.session.User;
 
 /**
  * Contract for sign in providers. This interface should be implemented in order implement a sign

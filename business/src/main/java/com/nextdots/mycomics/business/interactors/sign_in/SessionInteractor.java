@@ -3,6 +3,7 @@ package com.nextdots.mycomics.business.interactors.sign_in;
 import android.support.annotation.NonNull;
 
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
+import com.nextdots.mycomics.common.model.session.User;
 import com.nextdots.mycomics.common.providers.Provider;
 
 /**
@@ -24,6 +25,20 @@ public interface SessionInteractor {
    *         Callback to be used for the returning result
    */
   void signInUsingProvider(@NonNull Provider provider, @NonNull SignInCallback callback);
+
+  /**
+   * Returns the current stored session (if any). Otherwise returns null
+   *
+   * @return Returns the current session. Returns null if there is no stored session
+   */
+  User getCurrentSession();
+
+  /**
+   * Returns True if a user is logged. Oterhwise returns False
+   *
+   * @return True if a user is logged. Oterhwise returns False
+   */
+  boolean isUserLogged();
 
   /**
    * Callback used to return the result of the sign in operation

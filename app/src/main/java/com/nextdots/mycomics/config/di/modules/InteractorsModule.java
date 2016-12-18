@@ -4,6 +4,7 @@ import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractorImpl;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
 import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
+import com.nextdots.mycomics.persistence.managers.session.UsersManager;
 
 import javax.inject.Singleton;
 
@@ -24,14 +25,19 @@ public class InteractorsModule {
    *
    * @param facebookProvider
    *         Facebook provider
+   * @param googleProvider
+   *         Google provider
+   * @param usersManager
+   *         Users manager
    *
    * @return Instance of the {@link SessionInteractor}
    */
   @Provides
   @Singleton
   public SessionInteractor provideSessionInteractor(FacebookProvider facebookProvider,
-                                                    GoogleProvider googleProvider) {
-    return new SessionInteractorImpl(facebookProvider, googleProvider);
+                                                    GoogleProvider googleProvider,
+                                                    UsersManager usersManager) {
+    return new SessionInteractorImpl(facebookProvider, googleProvider, usersManager);
   }
 
 }

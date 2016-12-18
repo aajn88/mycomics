@@ -6,8 +6,8 @@ import android.net.Uri;
 import com.facebook.AccessToken;
 import com.facebook.Profile;
 import com.nextdots.mycomics.common.providers.Provider;
-import com.nextdots.mycomics.common.session.SessionToken;
-import com.nextdots.mycomics.common.session.User;
+import com.nextdots.mycomics.common.model.session.SessionToken;
+import com.nextdots.mycomics.common.model.session.User;
 
 /**
  * Implementation of the {@link FacebookProvider} to perform specific actions such as sign in

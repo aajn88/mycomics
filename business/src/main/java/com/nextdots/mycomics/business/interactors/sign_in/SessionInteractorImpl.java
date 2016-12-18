@@ -8,8 +8,9 @@ import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.business.providers.sign_in.SignInProvider;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
 import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
+import com.nextdots.mycomics.common.model.session.User;
 import com.nextdots.mycomics.common.providers.Provider;
-import com.nextdots.mycomics.common.session.User;
+import com.nextdots.mycomics.persistence.managers.session.UsersManager;
 
 /**
  * Implementation of the {@link SessionInteractor} that performs the specific process for sign in
@@ -29,8 +30,14 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   /** Google provider instance **/
   private final GoogleProvider mGoogleProvider;
 
+  /** Users manager **/
+  private final UsersManager mUsersManager;
+
   /** Sign in callback **/
   private SignInCallback mSignInCallback;
+
+  /** Current session **/
+  private User mCurrentSession;
 
   /**
    * Session interactor constructor
@@ -39,9 +46,11 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
    *         Facebook interactor instance
    */
   public SessionInteractorImpl(@NonNull FacebookProvider facebookProvider,
-                               @NonNull GoogleProvider googleProvider) {
+                               @NonNull GoogleProvider googleProvider,
+                               @NonNull UsersManager usersManager) {
     this.mFacebookProvider = facebookProvider;
     this.mGoogleProvider = googleProvider;
+    this.mUsersManager = usersManager;
   }
 
   @Override
@@ -50,6 +59,19 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
     this.mSignInCallback = callback;
     SignInProvider signInProvider = getSignInProvider(provider);
     signInProvider.signIn(this);
+  }
+
+  @Override
+  public User getCurrentSession() {
+    if (mCurrentSession == null) {
+      mCurrentSession = mUsersManager.findFirstUser();
+    }
+    return mCurrentSession;
+  }
+
+  @Override
+  public boolean isUserLogged() {
+    return getCurrentSession() != null;
   }
 
   /**
@@ -75,8 +97,20 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   public void signInSuccess(User user) {
     Log.i(TAG, "Sign in success");
     Log.d(TAG, "User information: " + user);
-    // TODO: Persist user info
+    persistSession(user);
     mSignInCallback.onSignInSuccess();
+  }
+
+  /**
+   * Persists the session of the given user
+   *
+   * @param user
+   *         User to be persisted
+   */
+  private void persistSession(User user) {
+    mUsersManager.deleteAll();
+    mUsersManager.createOrUpdate(user);
+    mCurrentSession = user;
   }
 
   @Override
