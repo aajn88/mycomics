@@ -50,6 +50,13 @@ public class SignInPresenter extends AbstractPresenter implements SessionInterac
   }
 
   /**
+   * Start Google signs in
+   */
+  public void googleSignIn() {
+    signIn(Provider.GOOGLE);
+  }
+
+  /**
    * Signs in using the given provider
    *
    * @param provider
@@ -69,5 +76,12 @@ public class SignInPresenter extends AbstractPresenter implements SessionInterac
   @Override
   public void onSignInFailure(MyComicsException e) {
     mSignInView.showLoading(false);
+  }
+
+  /**
+   * Called when onBackPressed button is pressed
+   */
+  public void onBackPressed() {
+    mSignInView.closeApp();
   }
 }

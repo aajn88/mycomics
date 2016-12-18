@@ -14,4 +14,9 @@ public interface SignInView extends BaseView {
    * Requests a redirect to home screen
    */
   void redirectToHome();
+
+  /**
+   * Closes the app
+   */
+  void closeApp();
 }

@@ -7,6 +7,7 @@ import com.nextdots.mycomics.business.R;
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.business.providers.sign_in.SignInProvider;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
+import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
 import com.nextdots.mycomics.common.providers.Provider;
 import com.nextdots.mycomics.common.session.User;
 
@@ -25,6 +26,9 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   /** Facebook provider instance **/
   private final FacebookProvider mFacebookProvider;
 
+  /** Google provider instance **/
+  private final GoogleProvider mGoogleProvider;
+
   /** Sign in callback **/
   private SignInCallback mSignInCallback;
 
@@ -34,8 +38,10 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
    * @param facebookProvider
    *         Facebook interactor instance
    */
-  public SessionInteractorImpl(@NonNull FacebookProvider facebookProvider) {
+  public SessionInteractorImpl(@NonNull FacebookProvider facebookProvider,
+                               @NonNull GoogleProvider googleProvider) {
     this.mFacebookProvider = facebookProvider;
+    this.mGoogleProvider = googleProvider;
   }
 
   @Override
@@ -60,6 +66,8 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
       default:
       case FACEBOOK:
         return mFacebookProvider;
+      case GOOGLE:
+        return mGoogleProvider;
     }
   }
 

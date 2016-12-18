@@ -66,6 +66,6 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
 
   @Override
   public void redirectToLogin() {
-    SignInActivity.start(this);
+    SignInActivity.start(this, mLogoIv);
   }
 }

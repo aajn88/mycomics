@@ -8,6 +8,8 @@
     android:supportsRtl="true">
     <activity android:name=".providers.sign_in.facebook.FacebookSignInActivity">
     </activity>
+    <activity android:name=".providers.sign_in.google.GoogleSignInActivity">
+    </activity>
   </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.nextdots.mycomics.config.di.modules;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractorImpl;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
+import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
 
 import javax.inject.Singleton;
 
@@ -28,8 +29,9 @@ public class InteractorsModule {
    */
   @Provides
   @Singleton
-  public SessionInteractor provideSessionInteractor(FacebookProvider facebookProvider) {
-    return new SessionInteractorImpl(facebookProvider);
+  public SessionInteractor provideSessionInteractor(FacebookProvider facebookProvider,
+                                                    GoogleProvider googleProvider) {
+    return new SessionInteractorImpl(facebookProvider, googleProvider);
   }
 
 }

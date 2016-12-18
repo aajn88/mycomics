@@ -1,12 +1,14 @@
 package com.nextdots.mycomics.mvp.views.login;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
+import com.google.android.gms.common.SignInButton;
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
@@ -34,6 +36,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
   @BindView(R.id.sign_in_buttons_container)
   ViewGroup mSignInButtonsContainer;
 
+  /** Google's sign in button **/
+  @BindView(R.id.google_sign_in_btn)
+  SignInButton mGoogleSignInButton;
+
   /** Progress bar **/
   @BindView(R.id.progress_bar)
   ProgressBar mProgressBar;
@@ -41,23 +47,40 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
   /**
    * Start Login activity given a context
    *
-   * @param context
-   *         Current context
+   * @param activity
+   *         Origin activity
+   * @param transitionLogo
+   *         View for transition logo
    */
-  public static void start(Context context) {
-    context.startActivity(new Intent(context, SignInActivity.class));
+  public static void start(Activity activity, View transitionLogo) {
+    Intent signInIntent = new Intent(activity, SignInActivity.class);
+    ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity,
+            transitionLogo, activity.getString(R.string.logo_transition));
+    activity.startActivity(signInIntent, options.toBundle());
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
+    mGoogleSignInButton.setSize(SignInButton.SIZE_WIDE);
     getPresenter().start();
   }
 
+  /**
+   * On click to start facebook sign in
+   */
   @OnClick(R.id.facebook_sign_in_btn)
   public void onFacebookSignInClick() {
     getPresenter().facebookSignIn();
+  }
+
+  /**
+   * On click to start google sign in
+   */
+  @OnClick(R.id.google_sign_in_btn)
+  public void onGoogleSignInClick() {
+    getPresenter().googleSignIn();
   }
 
   @Override
@@ -77,7 +100,17 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
   }
 
   @Override
+  public void onBackPressed() {
+    getPresenter().onBackPressed();
+  }
+
+  @Override
   public void redirectToHome() {
     // TODO: redirect to home
+  }
+
+  @Override
+  public void closeApp() {
+    finishAffinity();
   }
 }

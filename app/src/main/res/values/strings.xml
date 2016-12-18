@@ -4,6 +4,9 @@
   <!-- Images description -->
   <string name="logo_description">My comics logo</string>
 
+  <!-- Transition names -->
+  <string name="logo_transition">logo_transition</string>
+
   <!-- Sign in activity -->
   <string name="facebook_sign_in">Sign in with facebook</string>
 

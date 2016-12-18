@@ -28,4 +28,5 @@ public abstract class AbstractPresenter implements Presenter {
   public void onContextChanged(Component activity) {
     // Here comes what presenter should do in case of a context change
   }
+
 }
