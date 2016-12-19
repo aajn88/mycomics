@@ -16,4 +16,9 @@ public interface SplashView {
    * Redirects to login screen
    */
   void redirectToLogin();
+
+  /**
+   * Redirects to home screen
+   */
+  void redirectToHome();
 }

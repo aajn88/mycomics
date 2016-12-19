@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.nextdots.mycomics.R;
+import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
-import com.nextdots.mycomics.mvp.presenters.launch.SplashView;
 import com.nextdots.mycomics.mvp.presenters.launch.SplashPresenter;
+import com.nextdots.mycomics.mvp.presenters.launch.SplashView;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
+import com.nextdots.mycomics.mvp.views.home.HomeActivity;
 import com.nextdots.mycomics.mvp.views.login.SignInActivity;
 import com.nextdots.mycomics.utils.AnimationUtils;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -28,6 +32,10 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
   /** Logo Image View **/
   @BindView(R.id.logo_iv)
   ImageView mLogoIv;
+
+  /** Session interactor **/
+  @Inject
+  SessionInteractor mSessionInteractor;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,7 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
 
   @Override
   public SplashPresenter buildPresenter() {
-    return new SplashPresenter(this);
+    return new SplashPresenter(mSessionInteractor, this);
   }
 
   @Override
@@ -67,5 +75,10 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
   @Override
   public void redirectToLogin() {
     SignInActivity.start(this, mLogoIv);
+  }
+
+  @Override
+  public void redirectToHome() {
+    HomeActivity.start(this);
   }
 }

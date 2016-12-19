@@ -16,6 +16,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "COMICS_URL", '"https://gateway.marvel.com/v1/public/"'
+            buildConfigField "String", "COMICS_API_KEY", '"580cccfef16108b8f363925286a0eaed"'
+            buildConfigField "String", "COMICS_PRIVATE_KEY", '"8a6ece5cc03d6a38e041aaa339e08a02d37c889c"'
+        }
+
+        debug {
+            buildConfigField "String", "COMICS_URL", '"https://gateway.marvel.com/v1/public/"'
+            buildConfigField "String", "COMICS_API_KEY", '"580cccfef16108b8f363925286a0eaed"'
+            buildConfigField "String", "COMICS_PRIVATE_KEY", '"8a6ece5cc03d6a38e041aaa339e08a02d37c889c"'
         }
     }
 }
@@ -29,20 +38,19 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    testCompile 'junit:junit:4.12'
 
     compile project(":business")
 
+    compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.google.dagger:dagger:2.8'
     compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.google.dagger:dagger-compiler:2.8'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
-
     compile 'com.android.support:design:25.1.0'
     compile 'com.android.support:cardview-v7:25.1.0'
     compile 'com.android.support:recyclerview-v7:25.1.0'
-
+    compile 'com.github.pedrovgs:renderers:3.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
+    compile 'com.android.support:support-v4:25.1.0'
+    testCompile 'junit:junit:4.12'
+    apt 'com.google.dagger:dagger-compiler:2.8'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
 }

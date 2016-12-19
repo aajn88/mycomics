@@ -4,6 +4,8 @@ import android.app.Application;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.nextdots.mycomics.BuildConfig;
+import com.nextdots.mycomics.common.constants.MyComicsConstants;
 import com.nextdots.mycomics.config.di.DaggerDiComponent;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.config.di.modules.CommonModule;
@@ -43,6 +45,16 @@ public class MyComicsApplication extends Application {
             .persistenceModule(new PersistenceModule())
             .build();
     enableImageLoader();
+    initConstants();
+  }
+
+  /**
+   * This method inits the environment constants
+   */
+  private void initConstants() {
+    MyComicsConstants.sComicsServerUrl = BuildConfig.COMICS_URL;
+    MyComicsConstants.sComicsServerApiKey = BuildConfig.COMICS_API_KEY;
+    MyComicsConstants.sComicsServerPrivateKey = BuildConfig.COMICS_PRIVATE_KEY;
   }
 
   /**
