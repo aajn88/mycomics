@@ -2,6 +2,7 @@ package com.nextdots.mycomics.mvp.presenters.launch;
 
 import android.os.Handler;
 
+import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.mvp.presenters.common.AbstractPresenter;
 
 /**
@@ -13,6 +14,9 @@ public class SplashPresenter extends AbstractPresenter {
 
   /** The splash view instance **/
   private SplashView mView;
+
+  /** Session interactor **/
+  private final SessionInteractor mSessionInteractor;
 
   /** Constant for animation delay **/
   private static final int ANIM_DELAY = 500;
@@ -26,7 +30,8 @@ public class SplashPresenter extends AbstractPresenter {
    * @param splashView
    *         Splash view instance
    */
-  public SplashPresenter(SplashView splashView) {
+  public SplashPresenter(SessionInteractor sessionInteractor, SplashView splashView) {
+    this.mSessionInteractor = sessionInteractor;
     this.mView = splashView;
   }
 
@@ -51,7 +56,11 @@ public class SplashPresenter extends AbstractPresenter {
    * Processes the next screen. That means, go to login or directly to home screen
    */
   private void processNextScreen() {
-    mView.redirectToLogin();
+    if (mSessionInteractor.isUserLogged()) {
+      mView.redirectToHome();
+    } else {
+      mView.redirectToLogin();
+    }
   }
 
   @Override

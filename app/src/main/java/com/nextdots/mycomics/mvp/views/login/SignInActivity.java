@@ -15,6 +15,7 @@ import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.login.SignInPresenter;
 import com.nextdots.mycomics.mvp.presenters.login.SignInView;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
+import com.nextdots.mycomics.mvp.views.home.HomeActivity;
 
 import javax.inject.Inject;
 
@@ -106,7 +107,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
   @Override
   public void redirectToHome() {
-    // TODO: redirect to home
+    HomeActivity.start(this);
   }
 
   @Override

@@ -31,6 +31,7 @@ dependencies {
 
     compile project(":common")
     compile project(":persistence")
+    compile project(":communication")
 
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.google.android.gms:play-services-auth:10.0.1'
