@@ -11,16 +11,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.nextdots.mycomics.R;
-import com.nextdots.mycomics.business.interactors.comics.ComicsInteractor;
+import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.home.HomePresenter;
 import com.nextdots.mycomics.mvp.presenters.home.HomeView;
 import com.nextdots.mycomics.mvp.views.comics.ComicsListFragment;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
+import com.nextdots.mycomics.utils.ImageUtils;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
 
 /**
  * Home activity in which the navigation views are shown
@@ -32,9 +38,17 @@ public class HomeActivity extends BaseActivity<HomePresenter>
         implements HomeView, NavigationView.OnNavigationItemSelectedListener,
         ActivityFragmentCallback {
 
-  /** Comics interactor **/
+  /** Drawer layout **/
+  @BindView(R.id.drawer_layout)
+  DrawerLayout mDrawerLayout;
+
+  /** Navigation view **/
+  @BindView(R.id.nav_view)
+  NavigationView mNavigationView;
+
+  /** Session interactor **/
   @Inject
-  ComicsInteractor mComicsInteractor;
+  SessionInteractor mSessionInteractor;
 
   /**
    * Starts the {@link HomeActivity}
@@ -60,12 +74,23 @@ public class HomeActivity extends BaseActivity<HomePresenter>
 
   @Override
   public HomePresenter buildPresenter() {
-    return new HomePresenter(this);
+    return new HomePresenter(mSessionInteractor, this);
   }
 
   @Override
   public void showLoading(boolean show) {
     // No view to show loading
+  }
+
+  @Override
+  public void loadUserInfo(String name, String email, String pictureUrl) {
+    View headerView = mNavigationView.getHeaderView(0);
+    TextView mUserNameTv = (TextView) headerView.findViewById(R.id.user_name_tv);
+    TextView mUserEmailTv = (TextView) headerView.findViewById(R.id.user_email_tv);
+    ImageView mUserAvatarIv = (ImageView) headerView.findViewById(R.id.user_avatar_iv);
+    mUserNameTv.setText(name);
+    mUserEmailTv.setText(email);
+    ImageUtils.displayImage(mUserAvatarIv, pictureUrl, null);
   }
 
   @Override
@@ -105,18 +130,13 @@ public class HomeActivity extends BaseActivity<HomePresenter>
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 
-    if (id == R.id.nav_camera) {
-      // Handle the camera action
-    } else if (id == R.id.nav_gallery) {
-
-    } else if (id == R.id.nav_slideshow) {
-
-    } else if (id == R.id.nav_manage) {
-
-    } else if (id == R.id.nav_share) {
-
-    } else if (id == R.id.nav_send) {
-
+    switch (id) {
+      case R.id.nav_my_comics:
+        break;
+      case R.id.nav_my_favorites:
+        break;
+      case R.id.nav_log_out:
+        break;
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -133,15 +153,13 @@ public class HomeActivity extends BaseActivity<HomePresenter>
   public void setSupportActionBar(@Nullable Toolbar toolbar) {
     super.setSupportActionBar(toolbar);
 
-    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
     ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-            this, drawer, toolbar, R.string.navigation_drawer_open,
+            this, mDrawerLayout, toolbar, R.string.navigation_drawer_open,
             R.string.navigation_drawer_close);
-    drawer.addDrawerListener(toggle);
+    mDrawerLayout.addDrawerListener(toggle);
     toggle.syncState();
 
-    NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-    navigationView.setNavigationItemSelectedListener(this);
+    mNavigationView.setNavigationItemSelectedListener(this);
   }
 
 }

@@ -14,23 +14,28 @@
   android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
   <ImageView
-    android:id="@+id/imageView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:id="@+id/user_avatar_iv"
+    android:layout_width="68dp"
+    android:layout_height="68dp"
+    android:contentDescription="@string/user_avatar"
     android:paddingTop="@dimen/nav_header_vertical_spacing"
     app:srcCompat="@android:drawable/sym_def_app_icon"/>
 
-  <TextView
+  <com.nextdots.mycomics.custom_views.font.RobotoTextView
+    android:id="@+id/user_name_tv"
+    style="@style/Body1Style"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/nav_header_vertical_spacing"
-    android:text="Android Studio"
-    android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    android:text="@string/user_name"
+    android:textColor="@color/white"/>
 
   <TextView
-    android:id="@+id/textView"
+    android:id="@+id/user_email_tv"
+    style="@style/CaptionStyle"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="android.studio@android.com"/>
+    android:text="@string/user_email"
+    android:textColor="@color/white_70_percent"/>
 
 </LinearLayout>

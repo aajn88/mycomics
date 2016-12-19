@@ -1,19 +1,23 @@
 <resources>
   <string name="app_name">My Comics</string>
 
+  <!-- Images description -->
+  <string name="logo_description">My comics logo</string>
+  <string name="comic_logo">Comic\'s logo</string>
+  <string name="favorite_mark">Favorite mark</string>
+  <string name="user_avatar">User\'s avatar</string>
+
   <!-- Drawer -->
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="user_name">User\'s name</string>
+  <string name="user_email">user@email.com</string>
 
   <!-- Navigation options -->
   <string name="my_comics">My comics</string>
   <string name="my_favorites">My favorites</string>
   <string name="action_settings">Settings</string>
-
-  <!-- Images description -->
-  <string name="logo_description">My comics logo</string>
-  <string name="comic_logo">Comic\'s logo</string>
-  <string name="favorite_mark">Favorite mark</string>
+  <string name="log_out">log_out</string>
 
   <!-- Transition names -->
   <string name="logo_transition">logo_transition</string>
