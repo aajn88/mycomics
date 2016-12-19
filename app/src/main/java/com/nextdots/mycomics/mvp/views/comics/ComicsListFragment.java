@@ -6,10 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
@@ -20,6 +24,10 @@ import com.nextdots.mycomics.mvp.presenters.comics.ComicsListPresenter;
 import com.nextdots.mycomics.mvp.presenters.comics.ComicsListView;
 import com.nextdots.mycomics.mvp.views.common.BaseFragment;
 import com.nextdots.mycomics.mvp.views.home.ActionBarLoadedCallback;
+import com.nextdots.mycomics.mvp.views.renderers.ComicRenderer;
+import com.pedrogomez.renderers.ListAdapteeCollection;
+import com.pedrogomez.renderers.RVRendererAdapter;
+import com.pedrogomez.renderers.RendererBuilder;
 
 import java.util.List;
 
@@ -42,13 +50,28 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   /** Indicates if the needed instance is a favorites list **/
   private static final String IS_FAVORITES_LIST = "IS_FAVORITES_LIST";
 
+  /** Toolbar **/
+  @BindView(R.id.toolbar)
+  Toolbar mToolbar;
+
   /** Comics container **/
   @BindView(R.id.comics_container)
   ViewGroup mComicsContainer;
 
+  /** Comics Recycler view **/
+  @BindView(R.id.comics_rv)
+  RecyclerView mComicsRv;
+
+  /** Progress bar **/
+  @BindView(R.id.progress_bar)
+  ProgressBar mProgressBar;
+
   /** Comics interactor **/
   @Inject
   ComicsInteractor mComicsInteractor;
+
+  /** Comics renderer adapter **/
+  private RVRendererAdapter<Comic> mAdapter;
 
   /** Action bar loaded callback **/
   private ActionBarLoadedCallback mActionBarLoadedCallback;
@@ -94,6 +117,10 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    if (mActionBarLoadedCallback != null) {
+      mActionBarLoadedCallback.setActionBar(mToolbar);
+    }
+    mComicsRv.setLayoutManager(new LinearLayoutManager(getActivity()));
     getPresenter().start();
   }
 
@@ -123,7 +150,7 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
 
   @Override
   public void showLoading(boolean show) {
-    // TODO
+    mProgressBar.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
   }
 
   @Override
@@ -134,7 +161,14 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @Override
   public void showComicsList(@NonNull List<Comic> comics) {
     Log.d(TAG, "Comics to be displayed: " + comics);
-    // TODO
+    if (!isAdded()) {
+      return;
+    }
+
+    ComicRenderer renderer = new ComicRenderer();
+    RendererBuilder<Comic> builder = new RendererBuilder<>(renderer);
+    mAdapter = new RVRendererAdapter<>(builder, new ListAdapteeCollection<>(comics));
+    mComicsRv.setAdapter(mAdapter);
   }
 
   @Override

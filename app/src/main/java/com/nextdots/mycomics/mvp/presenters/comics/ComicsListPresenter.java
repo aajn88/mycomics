@@ -80,10 +80,12 @@ public class ComicsListPresenter extends AbstractPresenter
     } else {
       mComicsListView.addComicsList(comics);
     }
+    mComicsListView.showLoading(false);
   }
 
   @Override
   public void onComicsFailure(MyComicsException e) {
+    mComicsListView.showLoading(false);
     mComicsListView.errorLoadingComics(e);
   }
 }

@@ -3,6 +3,8 @@
 
   <!-- Images description -->
   <string name="logo_description">My comics logo</string>
+  <string name="comic_logo">Comic\'s logo</string>
+  <string name="favorite_mark">Favorite mark</string>
 
   <!-- Transition names -->
   <string name="logo_transition">logo_transition</string>
@@ -16,7 +18,9 @@
 
   <string name="action_settings">Settings</string>
 
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <!-- Comic item -->
+  <string name="comic_title">Comic title</string>
+  <string name="comic_price">$4.5</string>
+  <string name="sold_out">SOLD OUT!</string>
 
 </resources>

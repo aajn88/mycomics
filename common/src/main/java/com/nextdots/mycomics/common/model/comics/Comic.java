@@ -19,8 +19,17 @@ public class Comic {
   /** Description **/
   private String description;
 
+  /** Comic's thumbnail **/
+  private Image thumbnail;
+
+  /** Comic's images **/
+  private List<Image> images;
+
   /** List of available prices **/
   private List<Price> prices;
+
+  /** Is favorite comic **/
+  private boolean isFavorite;
 
   /**
    * @return the id
@@ -68,6 +77,36 @@ public class Comic {
   }
 
   /**
+   * @return the thumbnail
+   */
+  public Image getThumbnail() {
+    return thumbnail;
+  }
+
+  /**
+   * @param thumbnail
+   *         the thumbnail to set
+   */
+  public void setThumbnail(Image thumbnail) {
+    this.thumbnail = thumbnail;
+  }
+
+  /**
+   * @return the images
+   */
+  public List<Image> getImages() {
+    return images;
+  }
+
+  /**
+   * @param images
+   *         the images to set
+   */
+  public void setImages(List<Image> images) {
+    this.images = images;
+  }
+
+  /**
    * @return the prices
    */
   public List<Price> getPrices() {
@@ -82,12 +121,30 @@ public class Comic {
     this.prices = prices;
   }
 
+  /**
+   * @return the isFavorite
+   */
+  public boolean isFavorite() {
+    return isFavorite;
+  }
+
+  /**
+   * @param isFavorite
+   *         the isFavorite to set
+   */
+  public void setFavorite(boolean isFavorite) {
+    isFavorite = isFavorite;
+  }
+
   @Override
   public String toString() {
     return "Comic{" +
-            "id=" + id +
+            "isFavorite=" + isFavorite +
+            ", id=" + id +
             ", title='" + title + '\'' +
             ", description='" + description + '\'' +
+            ", thumbnail=" + thumbnail +
+            ", images=" + images +
             ", prices=" + prices +
             '}';
   }
