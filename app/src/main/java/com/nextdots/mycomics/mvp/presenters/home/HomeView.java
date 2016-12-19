@@ -32,4 +32,8 @@ public interface HomeView extends BaseView {
    */
   void showFavoritesComicsScreen();
 
+  /**
+   * Redirects to splash screen
+   */
+  void redirectToSplash();
 }

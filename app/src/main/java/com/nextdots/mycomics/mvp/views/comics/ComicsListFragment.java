@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -163,6 +162,11 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   }
 
   @Override
+  public void handleException(MyComicsException e) {
+    Snackbar.make(mComicsContainer, e.getCustomMessage(), Snackbar.LENGTH_LONG).show();
+  }
+
+  @Override
   public String key() {
     return super.key() + mIsFavoritesList;
   }
@@ -183,11 +187,5 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @Override
   public void addComicsList(@NonNull List<Comic> comics) {
     // TODO
-  }
-
-  @Override
-  public void errorLoadingComics(MyComicsException e) {
-    Snackbar.make(mComicsContainer, e.getCustomMessage(), BaseTransientBottomBar.LENGTH_LONG)
-            .show();
   }
 }

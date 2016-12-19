@@ -86,6 +86,6 @@ public class ComicsListPresenter extends AbstractPresenter
   @Override
   public void onComicsFailure(MyComicsException e) {
     mComicsListView.showLoading(false);
-    mComicsListView.errorLoadingComics(e);
+    mComicsListView.handleException(e);
   }
 }

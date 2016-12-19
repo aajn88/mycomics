@@ -3,6 +3,7 @@ package com.nextdots.mycomics.mvp.views.home;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -10,18 +11,21 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nextdots.mycomics.R;
+import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.home.HomePresenter;
 import com.nextdots.mycomics.mvp.presenters.home.HomeView;
 import com.nextdots.mycomics.mvp.views.comics.ComicsListFragment;
 import com.nextdots.mycomics.mvp.views.common.BaseActivity;
+import com.nextdots.mycomics.mvp.views.launch.MainActivity;
 import com.nextdots.mycomics.utils.ImageUtils;
 
 import javax.inject.Inject;
@@ -83,6 +87,11 @@ public class HomeActivity extends BaseActivity<HomePresenter>
   }
 
   @Override
+  public void handleException(MyComicsException e) {
+
+  }
+
+  @Override
   public void loadUserInfo(String name, String email, String pictureUrl) {
     View headerView = mNavigationView.getHeaderView(0);
     TextView mUserNameTv = (TextView) headerView.findViewById(R.id.user_name_tv);
@@ -96,11 +105,40 @@ public class HomeActivity extends BaseActivity<HomePresenter>
   @Override
   public void showComicsScreen() {
     replaceComicsScreen(false);
+    selectMenuItem(R.id.nav_my_comics);
   }
 
   @Override
   public void showFavoritesComicsScreen() {
     replaceComicsScreen(true);
+    selectMenuItem(R.id.nav_my_favorites);
+  }
+
+  @Override
+  public void redirectToSplash() {
+    MainActivity.start(this);
+  }
+
+  /**
+   * Selects a menu item from navigation view
+   *
+   * @param itemId
+   *         Item ID to be selected
+   */
+  private void selectMenuItem(@IdRes int itemId) {
+    cleanSelection();
+    mNavigationView.getMenu().findItem(itemId).setChecked(true);
+  }
+
+  /**
+   * Cleans navigation view selections
+   */
+  private void cleanSelection() {
+    Menu menu = mNavigationView.getMenu();
+    for (int i = 0; i < menu.size(); i++) {
+      MenuItem menuItem = menu.getItem(i);
+      menuItem.setChecked(false);
+    }
   }
 
   /**
@@ -124,18 +162,20 @@ public class HomeActivity extends BaseActivity<HomePresenter>
     }
   }
 
-  @SuppressWarnings("StatementWithEmptyBody")
   @Override
-  public boolean onNavigationItemSelected(MenuItem item) {
+  public boolean onNavigationItemSelected(@NonNull MenuItem item) {
     // Handle navigation view item clicks here.
     int id = item.getItemId();
 
     switch (id) {
       case R.id.nav_my_comics:
+        getPresenter().onMyComicsSelected();
         break;
       case R.id.nav_my_favorites:
+        getPresenter().onMyFavoritesSelected();
         break;
       case R.id.nav_log_out:
+        getPresenter().onLogOutSelected();
         break;
     }
 

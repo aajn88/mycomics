@@ -3,6 +3,7 @@ package com.nextdots.mycomics.mvp.views.login;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ProgressBar;
 
 import com.google.android.gms.common.SignInButton;
 import com.nextdots.mycomics.R;
+import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractor;
 import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.login.SignInPresenter;
@@ -98,6 +100,11 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
   public void showLoading(boolean show) {
     mSignInButtonsContainer.setVisibility(!show ? View.VISIBLE : View.GONE);
     mProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+  }
+
+  @Override
+  public void handleException(MyComicsException e) {
+    Snackbar.make(mProgressBar, e.getCustomMessage(), Snackbar.LENGTH_LONG).show();
   }
 
   @Override

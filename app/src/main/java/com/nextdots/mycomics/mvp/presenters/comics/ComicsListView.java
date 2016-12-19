@@ -2,7 +2,6 @@ package com.nextdots.mycomics.mvp.presenters.comics;
 
 import android.support.annotation.NonNull;
 
-import com.nextdots.mycomics.business.exceptions.MyComicsException;
 import com.nextdots.mycomics.common.model.comics.Comic;
 import com.nextdots.mycomics.mvp.presenters.common.BaseView;
 
@@ -32,11 +31,4 @@ public interface ComicsListView extends BaseView {
    */
   void addComicsList(@NonNull List<Comic> comics);
 
-  /**
-   * Error loading comics
-   *
-   * @param e
-   *         Occurred exception
-   */
-  void errorLoadingComics(MyComicsException e);
 }
