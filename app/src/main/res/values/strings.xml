@@ -1,6 +1,15 @@
 <resources>
   <string name="app_name">My Comics</string>
 
+  <!-- Drawer -->
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+
+  <!-- Navigation options -->
+  <string name="my_comics">My comics</string>
+  <string name="my_favorites">My favorites</string>
+  <string name="action_settings">Settings</string>
+
   <!-- Images description -->
   <string name="logo_description">My comics logo</string>
   <string name="comic_logo">Comic\'s logo</string>
@@ -12,11 +21,6 @@
   <!-- Sign in activity -->
   <string name="facebook_sign_in">Sign in with facebook</string>
   <string name="title_activity_home">HomeActivity</string>
-
-  <string name="navigation_drawer_open">Open navigation drawer</string>
-  <string name="navigation_drawer_close">Close navigation drawer</string>
-
-  <string name="action_settings">Settings</string>
 
   <!-- Comic item -->
   <string name="comic_title">Comic title</string>

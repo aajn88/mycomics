@@ -23,7 +23,7 @@ import com.nextdots.mycomics.config.di.DiComponent;
 import com.nextdots.mycomics.mvp.presenters.comics.ComicsListPresenter;
 import com.nextdots.mycomics.mvp.presenters.comics.ComicsListView;
 import com.nextdots.mycomics.mvp.views.common.BaseFragment;
-import com.nextdots.mycomics.mvp.views.home.ActionBarLoadedCallback;
+import com.nextdots.mycomics.mvp.views.home.ActivityFragmentCallback;
 import com.nextdots.mycomics.mvp.views.renderers.ComicRenderer;
 import com.pedrogomez.renderers.ListAdapteeCollection;
 import com.pedrogomez.renderers.RVRendererAdapter;
@@ -74,7 +74,7 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   private RVRendererAdapter<Comic> mAdapter;
 
   /** Action bar loaded callback **/
-  private ActionBarLoadedCallback mActionBarLoadedCallback;
+  private ActivityFragmentCallback mActivityFragmentCallback;
 
   /** Is favorites list **/
   private boolean mIsFavoritesList;
@@ -117,25 +117,34 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @Override
   public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    if (mActionBarLoadedCallback != null) {
-      mActionBarLoadedCallback.setActionBar(mToolbar);
+    if (mActivityFragmentCallback != null) {
+      mActivityFragmentCallback.setActionBar(mToolbar);
     }
     mComicsRv.setLayoutManager(new LinearLayoutManager(getActivity()));
+    setTitle();
     getPresenter().start();
+  }
+
+  /**
+   * Sets the corresponding title
+   */
+  private void setTitle() {
+    int titleRes = mIsFavoritesList ? R.string.my_favorites : R.string.my_comics;
+    mActivityFragmentCallback.setTitle(titleRes);
   }
 
   @Override
   public void onAttach(Context context) {
     super.onAttach(context);
-    if (context instanceof ActionBarLoadedCallback) {
-      mActionBarLoadedCallback = (ActionBarLoadedCallback) context;
+    if (context instanceof ActivityFragmentCallback) {
+      mActivityFragmentCallback = (ActivityFragmentCallback) context;
     }
   }
 
   @Override
   public void onDetach() {
     super.onDetach();
-    mActionBarLoadedCallback = null;
+    mActivityFragmentCallback = null;
   }
 
   @Override
