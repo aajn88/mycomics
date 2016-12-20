@@ -124,6 +124,11 @@ public class HomeActivity extends BaseActivity<HomePresenter>
     finishAffinity();
   }
 
+  @Override
+  public void closeApp() {
+    finishAffinity();
+  }
+
   /**
    * Selects a menu item from navigation view
    *
@@ -167,7 +172,7 @@ public class HomeActivity extends BaseActivity<HomePresenter>
     if (drawer.isDrawerOpen(GravityCompat.START)) {
       drawer.closeDrawer(GravityCompat.START);
     } else {
-      super.onBackPressed();
+      getPresenter().onBackPressed();
     }
   }
 

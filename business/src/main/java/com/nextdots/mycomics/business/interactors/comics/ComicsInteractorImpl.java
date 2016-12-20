@@ -4,10 +4,14 @@ import android.support.annotation.NonNull;
 
 import com.nextdots.mycomics.business.R;
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
+import com.nextdots.mycomics.common.model.comics.Comic;
 import com.nextdots.mycomics.common.model.common.PageInfo;
 import com.nextdots.mycomics.common.model.dto.ComicsList;
 import com.nextdots.mycomics.common.model.dto.ComicsListResponse;
 import com.nextdots.mycomics.communication.api.commics.ComicsApi;
+import com.nextdots.mycomics.persistence.managers.comics.ComicsManager;
+
+import java.util.List;
 
 /**
  * Implementation of the {@link ComicsInteractor}
@@ -20,6 +24,9 @@ public class ComicsInteractorImpl implements ComicsInteractor, ComicsApi.ComicsR
   /** Items limit per request **/
   private static final int ITEMS_LIMIT = 30;
 
+  /** Comics Manager **/
+  private final ComicsManager mComicsManager;
+
   /** Comics API **/
   private final ComicsApi mComicsApi;
 
@@ -29,10 +36,13 @@ public class ComicsInteractorImpl implements ComicsInteractor, ComicsApi.ComicsR
   /**
    * Comics interactor constructor
    *
+   * @param comicsManager
+   *         Comics manager
    * @param comicsApi
    *         Comics API to consume server services
    */
-  public ComicsInteractorImpl(ComicsApi comicsApi) {
+  public ComicsInteractorImpl(ComicsManager comicsManager, ComicsApi comicsApi) {
+    this.mComicsManager = comicsManager;
     this.mComicsApi = comicsApi;
   }
 
@@ -45,8 +55,28 @@ public class ComicsInteractorImpl implements ComicsInteractor, ComicsApi.ComicsR
 
   @Override
   public void getFavoriteComics(@NonNull ComicsCallback comicsCallback) {
-    this.mComicsCallback = comicsCallback;
-    // TODO: Read stored favorite comics
+    List<Comic> comics = mComicsManager.all();
+    PageInfo pageInfo = new PageInfo().
+            setTotalItems(comics.size())
+            .setPagesLimit(1)
+            .setItemsPerPage(comics.size())
+            .setCurrentPage(1);
+    comicsCallback.onComicsSuccess(comics, pageInfo);
+  }
+
+  @Override
+  public boolean isFavoriteComic(int comicId) {
+    return mComicsManager.findById(comicId) != null;
+  }
+
+  @Override
+  public void saveFavorite(Comic comic) {
+    mComicsManager.createOrUpdate(comic);
+  }
+
+  @Override
+  public void removeFavorite(int comicId) {
+    mComicsManager.deleteById(comicId);
   }
 
   /**

@@ -14,6 +14,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.support.DatabaseConnection;
 import com.j256.ormlite.table.DatabaseTableConfig;
 import com.j256.ormlite.table.TableUtils;
+import com.nextdots.mycomics.common.model.comics.Comic;
 import com.nextdots.mycomics.common.model.session.User;
 
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
   private static final String DB_NAME = "my_comics.db";
 
   /** DB Version **/
-  private static final int DB_VERSION = 1;
+  private static final int DB_VERSION = 3;
 
   /** The connection source **/
   protected AndroidConnectionSource connectionSource = new AndroidConnectionSource(this);
@@ -130,6 +131,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
       // List of tables to be created
       TableUtils.createTable(connectionSource, User.class);
+      TableUtils.createTable(connectionSource, Comic.class);
 
       Log.i(TAG_LOG, "DB successfully created");
     } catch (SQLException e) {
@@ -181,6 +183,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
       // Just in this case: Drop all tables and create the DB again
       TableUtils.dropTable(connectionSource, User.class, true);
+      TableUtils.dropTable(connectionSource, Comic.class, true);
 
       onCreate();
     } catch (SQLException e) {

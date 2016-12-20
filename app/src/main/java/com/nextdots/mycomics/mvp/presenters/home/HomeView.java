@@ -36,4 +36,9 @@ public interface HomeView extends BaseView {
    * Redirects to splash screen
    */
   void redirectToSplash();
+
+  /**
+   * Closes the app
+   */
+  void closeApp();
 }

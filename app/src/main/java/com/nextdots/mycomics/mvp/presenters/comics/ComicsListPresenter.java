@@ -76,16 +76,62 @@ public class ComicsListPresenter extends AbstractPresenter
   @Override
   public void onComicsSuccess(@NonNull List<Comic> comics, @NonNull PageInfo pageInfo) {
     if (pageInfo.getCurrentPage() == STARTING_PAGE) {
-      mComicsListView.showComicsList(comics);
+      replaceComicsList(comics);
     } else {
       mComicsListView.addComicsList(comics);
     }
     mComicsListView.showLoading(false);
   }
 
+  /**
+   * Replaces the existing comics list
+   *
+   * @param comics
+   *         Comics list to be shown
+   */
+  private void replaceComicsList(@NonNull List<Comic> comics) {
+    if (comics.isEmpty()) {
+      mComicsListView.showEmptyComicsListMessage();
+    } else {
+      mComicsListView.showComicsList(comics);
+    }
+  }
+
   @Override
   public void onComicsFailure(MyComicsException e) {
     mComicsListView.showLoading(false);
     mComicsListView.handleException(e);
+  }
+
+  /**
+   * Checks if the given comic is favorite
+   *
+   * @param comic
+   *         Comic to be checked
+   *
+   * @return True if is a favorite comic. False otherwise
+   */
+  public boolean isFavoriteComic(@NonNull Comic comic) {
+    return mComicsInteractor.isFavoriteComic(comic.getId());
+  }
+
+  /**
+   * Saves favorite comic
+   *
+   * @param comic
+   *         Comic to be saved as a favorite
+   */
+  public void saveFavorite(@NonNull Comic comic) {
+    mComicsInteractor.saveFavorite(comic);
+  }
+
+  /**
+   * Removes a comic from favorites
+   *
+   * @param comic
+   *         Comic to be removed
+   */
+  public void removeFavorite(@NonNull Comic comic) {
+    mComicsInteractor.removeFavorite(comic.getId());
   }
 }

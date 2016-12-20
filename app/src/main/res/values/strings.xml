@@ -26,6 +26,10 @@
   <string name="facebook_sign_in">Sign in with facebook</string>
   <string name="title_activity_home">HomeActivity</string>
 
+  <!-- Comics list -->
+  <string name="no_comics">There are no comics! :(</string>
+  <string name="no_favorite_comics">You don\'t have favorite comics! &lt;/3</string>
+
   <!-- Comic item -->
   <string name="comic_title">Comic title</string>
   <string name="comic_price">$4.5</string>

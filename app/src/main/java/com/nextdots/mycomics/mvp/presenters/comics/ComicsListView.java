@@ -31,4 +31,9 @@ public interface ComicsListView extends BaseView {
    */
   void addComicsList(@NonNull List<Comic> comics);
 
+  /**
+   * Shows a message to the user that indicates that there are no available comics
+   */
+  void showEmptyComicsListMessage();
+
 }

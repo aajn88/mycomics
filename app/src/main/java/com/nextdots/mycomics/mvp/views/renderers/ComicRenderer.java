@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.common.model.comics.Comic;
 import com.nextdots.mycomics.common.model.comics.Price;
+import com.nextdots.mycomics.mvp.presenters.comics.ComicsListPresenter;
 import com.nextdots.mycomics.utils.ImageUtils;
 import com.nextdots.mycomics.utils.ViewUtils;
 
@@ -17,6 +18,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Basic comic renderer
@@ -45,6 +47,19 @@ public class ComicRenderer extends BaseRenderer<Comic> {
   @BindView(R.id.favorite_iv)
   ImageView mFavoriteMarkIv;
 
+  /** Comics list presenter **/
+  private final ComicsListPresenter mComicsListPresenter;
+
+  /**
+   * Comic renderer constructor
+   *
+   * @param comicsListPresenter
+   *         Comics list presenter
+   */
+  public ComicRenderer(ComicsListPresenter comicsListPresenter) {
+    this.mComicsListPresenter = comicsListPresenter;
+  }
+
   @NonNull
   @Override
   protected View inflateView(LayoutInflater inflater, ViewGroup parent) {
@@ -57,6 +72,21 @@ public class ComicRenderer extends BaseRenderer<Comic> {
     renderLogo(comic);
     renderTitle(comic);
     renderPrice(comic);
+    renderFavorite(comic);
+  }
+
+  /**
+   * Called when favorite icon is clicked
+   */
+  @OnClick(R.id.favorite_iv)
+  public void onClickFavorite() {
+    Comic comic = getContent();
+    boolean addFavorite = !mComicsListPresenter.isFavoriteComic(comic);
+    if (addFavorite) {
+      mComicsListPresenter.saveFavorite(comic);
+    } else {
+      mComicsListPresenter.removeFavorite(comic);
+    }
     renderFavorite(comic);
   }
 
@@ -113,8 +143,9 @@ public class ComicRenderer extends BaseRenderer<Comic> {
    *         The comic
    */
   protected void renderFavorite(Comic comic) {
+    boolean isFavorite = mComicsListPresenter.isFavoriteComic(comic);
     int favoriteDrawable =
-            comic.isFavorite() ? R.drawable.ic_favorite_red_light : R.drawable.ic_favorite_black_12;
+            isFavorite ? R.drawable.ic_favorite_red_light : R.drawable.ic_favorite_black_12;
     mFavoriteMarkIv.setImageDrawable(ViewUtils.getDrawable(getContext(), favoriteDrawable));
   }
 
