@@ -49,6 +49,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.github.pedrovgs:renderers:3.2.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
     compile 'com.android.support:support-v4:25.1.0'
     testCompile 'junit:junit:4.12'
     apt 'com.google.dagger:dagger-compiler:2.8'

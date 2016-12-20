@@ -74,6 +74,14 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
     return getCurrentSession() != null;
   }
 
+  @Override
+  public void logOutUser(@NonNull LogOutCallback callback) {
+    // TODO: Log out form provider
+    mUsersManager.deleteAll();
+    mCurrentSession = null;
+    callback.onLogOutSuccess();
+  }
+
   /**
    * Returns the specific {@link SignInProvider} given the {@link Provider}
    *

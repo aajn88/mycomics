@@ -76,6 +76,7 @@ public class SignInPresenter extends AbstractPresenter implements SessionInterac
   @Override
   public void onSignInFailure(MyComicsException e) {
     mSignInView.showLoading(false);
+    mSignInView.handleException(e);
   }
 
   /**

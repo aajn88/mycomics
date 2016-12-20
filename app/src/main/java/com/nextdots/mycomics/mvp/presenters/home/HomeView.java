@@ -11,6 +11,18 @@ import com.nextdots.mycomics.mvp.presenters.common.BaseView;
 public interface HomeView extends BaseView {
 
   /**
+   * Loads the user info
+   *
+   * @param name
+   *         User's name
+   * @param email
+   *         User's email
+   * @param pictureUrl
+   *         User's picture
+   */
+  void loadUserInfo(String name, String email, String pictureUrl);
+
+  /**
    * Shows the comics screen
    */
   void showComicsScreen();
@@ -20,4 +32,8 @@ public interface HomeView extends BaseView {
    */
   void showFavoritesComicsScreen();
 
+  /**
+   * Redirects to splash screen
+   */
+  void redirectToSplash();
 }

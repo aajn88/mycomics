@@ -2,6 +2,8 @@ package com.nextdots.mycomics.mvp.views.launch;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
@@ -37,15 +39,20 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
   @Inject
   SessionInteractor mSessionInteractor;
 
+  /**
+   * Starts the Main/Splash activity
+   *
+   * @param context
+   *         Origin context
+   */
+  public static void start(Context context) {
+    context.startActivity(new Intent(context, MainActivity.class));
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-  }
-
-  @Override
-  protected void onStart() {
-    super.onStart();
     getPresenter().start();
   }
 
@@ -75,10 +82,17 @@ public class MainActivity extends BaseActivity<SplashPresenter> implements Splas
   @Override
   public void redirectToLogin() {
     SignInActivity.start(this, mLogoIv);
+    getApplicationContext().unbindPresenter(this);
   }
 
   @Override
   public void redirectToHome() {
     HomeActivity.start(this);
+    getApplicationContext().unbindPresenter(this);
+  }
+
+  @Override
+  public void onBackPressed() {
+    // Does nothing
   }
 }
