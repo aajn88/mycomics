@@ -1,5 +1,7 @@
 package com.nextdots.mycomics.business.providers.sign_in;
 
+import android.support.annotation.NonNull;
+
 import com.nextdots.mycomics.common.model.session.User;
 
 /**
@@ -9,7 +11,7 @@ import com.nextdots.mycomics.common.model.session.User;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  * @since 16/12/16
  */
-public interface SignInProvider {
+public interface SessionProvider {
 
   /**
    * Starts sign in process given by the provider
@@ -17,7 +19,15 @@ public interface SignInProvider {
    * @param callback
    *         Callback to return the resulting process
    */
-  void signIn(SignInCallback callback);
+  void signIn(@NonNull SignInCallback callback);
+
+  /**
+   * Signs out the current session
+   *
+   * @param callback
+   *         Callback used to return the result
+   */
+  void signOut(@NonNull SignOutCallback callback);
 
   /**
    * Callback to return the sign in process result or to ask credentials (if necessary) such as
@@ -41,6 +51,26 @@ public interface SignInProvider {
      *         Throwable thrown by the provider
      */
     void signInFailure(Throwable t);
+
+  }
+
+  /**
+   * Callback used to return the sign out process result
+   */
+  interface SignOutCallback {
+
+    /**
+     * Called when sign out process has succeeded
+     */
+    void signOutSuccess();
+
+    /**
+     * Called when sign out process has failed
+     *
+     * @param t
+     *         Throwable thrown by the provider
+     */
+    void signOutFailure(Throwable t);
 
   }
 

@@ -13,7 +13,7 @@
  * is strictly forbidden unless prior written permission is obtained
  * from Click Delivery.
  */
-package com.nextdots.mycomics.business.providers.sign_in.google;
+package com.nextdots.mycomics.business.providers.sign_in.google.session_activities;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 

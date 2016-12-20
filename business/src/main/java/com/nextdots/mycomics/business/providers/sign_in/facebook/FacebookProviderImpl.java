@@ -2,12 +2,15 @@ package com.nextdots.mycomics.business.providers.sign_in.facebook;
 
 import android.content.Context;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.Profile;
-import com.nextdots.mycomics.common.providers.Provider;
+import com.facebook.login.LoginManager;
 import com.nextdots.mycomics.common.model.session.SessionToken;
 import com.nextdots.mycomics.common.model.session.User;
+import com.nextdots.mycomics.common.providers.Provider;
 
 /**
  * Implementation of the {@link FacebookProvider} to perform specific actions such as sign in
@@ -17,6 +20,9 @@ import com.nextdots.mycomics.common.model.session.User;
  */
 public class FacebookProviderImpl implements FacebookProvider,
         FacebookAccess.FacebookAccessCallback {
+
+  /** Tag for logs **/
+  private static final String TAG = FacebookProviderImpl.class.getSimpleName();
 
   /** Application context **/
   private final Context mContext;
@@ -35,9 +41,17 @@ public class FacebookProviderImpl implements FacebookProvider,
   }
 
   @Override
-  public void signIn(SignInCallback callback) {
+  public void signIn(@NonNull SignInCallback callback) {
+    Log.i(TAG, "Facebook sign in provider called");
     this.mSignInCallback = callback;
     FacebookSignInActivity.startAndSignIn(mContext, this);
+  }
+
+  @Override
+  public void signOut(@NonNull SignOutCallback callback) {
+    Log.i(TAG, "Facebook sign out provider called");
+    LoginManager.getInstance().logOut();
+    callback.signOutSuccess();
   }
 
   @Override

@@ -12,7 +12,7 @@ import com.nextdots.mycomics.mvp.presenters.common.AbstractPresenter;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  * @since 18/12/16
  */
-public class HomePresenter extends AbstractPresenter implements SessionInteractor.LogOutCallback {
+public class HomePresenter extends AbstractPresenter implements SessionInteractor.SignOutCallback {
 
   /** Name format **/
   private static final String NAME_FORMAT = "%s %s";
@@ -65,16 +65,16 @@ public class HomePresenter extends AbstractPresenter implements SessionInteracto
    * Called when users needs to log out
    */
   public void onLogOutSelected() {
-    mSessionInteractor.logOutUser(this);
+    mSessionInteractor.signOutUser(this);
   }
 
   @Override
-  public void onLogOutSuccess() {
+  public void onSignOutSuccess() {
     mHomeView.redirectToSplash();
   }
 
   @Override
-  public void onLogOutFailure(MyComicsException e) {
+  public void onSignOutFailure(MyComicsException e) {
     mHomeView.handleException(e);
   }
 }

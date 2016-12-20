@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.nextdots.mycomics.business.R;
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
-import com.nextdots.mycomics.business.providers.sign_in.SignInProvider;
+import com.nextdots.mycomics.business.providers.sign_in.SessionProvider;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
 import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
 import com.nextdots.mycomics.common.model.session.User;
@@ -19,7 +19,8 @@ import com.nextdots.mycomics.persistence.managers.session.UsersManager;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  * @since 16/12/16
  */
-public class SessionInteractorImpl implements SessionInteractor, SignInProvider.SignInCallback {
+public class SessionInteractorImpl implements SessionInteractor, SessionProvider.SignInCallback,
+        SessionProvider.SignOutCallback {
 
   /** Tag logs **/
   private static final String TAG = SessionInteractorImpl.class.getSimpleName();
@@ -35,6 +36,9 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
 
   /** Sign in callback **/
   private SignInCallback mSignInCallback;
+
+  /** Sign out callback **/
+  private SignOutCallback mSignOutCallback;
 
   /** Current session **/
   private User mCurrentSession;
@@ -57,8 +61,8 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   public void signInUsingProvider(@NonNull Provider provider,
                                   @NonNull SignInCallback callback) {
     this.mSignInCallback = callback;
-    SignInProvider signInProvider = getSignInProvider(provider);
-    signInProvider.signIn(this);
+    SessionProvider sessionProvider = getSessionProvider(provider);
+    sessionProvider.signIn(this);
   }
 
   @Override
@@ -75,23 +79,29 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   }
 
   @Override
-  public void logOutUser(@NonNull LogOutCallback callback) {
-    // TODO: Log out form provider
-    mUsersManager.deleteAll();
-    mCurrentSession = null;
-    callback.onLogOutSuccess();
+  public void signOutUser(@NonNull SignOutCallback callback) {
+    this.mSignOutCallback = callback;
+    signOutFromProvider();
   }
 
   /**
-   * Returns the specific {@link SignInProvider} given the {@link Provider}
+   * Logs out from {@link SessionProvider}
+   */
+  private void signOutFromProvider() {
+    SessionProvider sessionProvider = getSessionProvider(mCurrentSession.getSessionProvider());
+    sessionProvider.signOut(this);
+  }
+
+  /**
+   * Returns the specific {@link SessionProvider} given the {@link Provider}
    *
    * @param provider
    *         Target provider
    *
-   * @return {@link SignInProvider} instance
+   * @return {@link SessionProvider} instance
    */
   @NonNull
-  private SignInProvider getSignInProvider(@NonNull Provider provider) {
+  private SessionProvider getSessionProvider(@NonNull Provider provider) {
     switch (provider) {
       default:
       case FACEBOOK:
@@ -125,5 +135,18 @@ public class SessionInteractorImpl implements SessionInteractor, SignInProvider.
   public void signInFailure(Throwable t) {
     mSignInCallback.onSignInFailure(
             new MyComicsException(t.getMessage(), R.string.error_signing_in));
+  }
+
+  @Override
+  public void signOutSuccess() {
+    mUsersManager.deleteAll();
+    mCurrentSession = null;
+    mSignOutCallback.onSignOutSuccess();
+  }
+
+  @Override
+  public void signOutFailure(Throwable t) {
+    mSignOutCallback.onSignOutFailure(
+            new MyComicsException(t.getMessage(), R.string.error_signing_out));
   }
 }

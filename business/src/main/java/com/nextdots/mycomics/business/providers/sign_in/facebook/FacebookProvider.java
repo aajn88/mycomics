@@ -1,6 +1,6 @@
 package com.nextdots.mycomics.business.providers.sign_in.facebook;
 
-import com.nextdots.mycomics.business.providers.sign_in.SignInProvider;
+import com.nextdots.mycomics.business.providers.sign_in.SessionProvider;
 
 /**
  * Facebook provider in which sign in actions can be performed
@@ -8,6 +8,6 @@ import com.nextdots.mycomics.business.providers.sign_in.SignInProvider;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  * @since 16/12/16
  */
-public interface FacebookProvider extends SignInProvider {
+public interface FacebookProvider extends SessionProvider {
 
 }

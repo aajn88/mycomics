@@ -1,4 +1,4 @@
-package com.nextdots.mycomics.business.providers.sign_in.google;
+package com.nextdots.mycomics.business.providers.sign_in.google.session_activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +32,11 @@ public class GoogleSignInActivity extends AppCompatActivity
   /** Sign in request code **/
   private final int RC_SIGN_IN = 1;
 
-  /** Google access callback **/
+  /** Static Google access callback **/
   private static GoogleAccess.GoogleAccessCallback sGoogleAccessCallback;
+
+  /** Google access callback **/
+  private GoogleAccess.GoogleAccessCallback mGoogleAccessCallback;
 
   /**
    * Starts and tries to sign in a user
@@ -54,6 +57,7 @@ public class GoogleSignInActivity extends AppCompatActivity
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    mGoogleAccessCallback = sGoogleAccessCallback;
     GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build();
@@ -65,8 +69,14 @@ public class GoogleSignInActivity extends AppCompatActivity
   }
 
   @Override
+  protected void onDestroy() {
+    super.onDestroy();
+    mGoogleAccessCallback = null;
+  }
+
+  @Override
   public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-    sGoogleAccessCallback.onGoogleAccessFailure(new Throwable("Connection failed"));
+    mGoogleAccessCallback.onGoogleAccessFailure(new Throwable("Connection failed"));
     finish();
   }
 
@@ -92,9 +102,9 @@ public class GoogleSignInActivity extends AppCompatActivity
     if (result.isSuccess()) {
       // Signed in successfully, show authenticated UI.
       GoogleSignInAccount acct = result.getSignInAccount();
-      sGoogleAccessCallback.onGoogleAccessSuccess(acct);
+      mGoogleAccessCallback.onGoogleAccessSuccess(acct);
     } else {
-      sGoogleAccessCallback.onGoogleAccessFailure(new Throwable("Couldn't sign in"));
+      mGoogleAccessCallback.onGoogleAccessFailure(new Throwable("Couldn't sign in"));
     }
     finish();
   }

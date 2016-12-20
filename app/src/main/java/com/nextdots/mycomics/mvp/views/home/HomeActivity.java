@@ -11,6 +11,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,9 @@ import butterknife.BindView;
 public class HomeActivity extends BaseActivity<HomePresenter>
         implements HomeView, NavigationView.OnNavigationItemSelectedListener,
         ActivityFragmentCallback {
+
+  /** Tag for logs **/
+  private static final String TAG = HomeActivity.class.getSimpleName();
 
   /** Drawer layout **/
   @BindView(R.id.drawer_layout)
@@ -117,6 +121,7 @@ public class HomeActivity extends BaseActivity<HomePresenter>
   @Override
   public void redirectToSplash() {
     MainActivity.start(this);
+    finishAffinity();
   }
 
   /**
@@ -148,8 +153,12 @@ public class HomeActivity extends BaseActivity<HomePresenter>
    *         Is a favorites screen?
    */
   private void replaceComicsScreen(boolean isFavoritesScreen) {
-    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main_container,
-            ComicsListFragment.newInstance(isFavoritesScreen)).commit();
+    try {
+      getSupportFragmentManager().beginTransaction().replace(R.id.fragment_main_container,
+              ComicsListFragment.newInstance(isFavoritesScreen)).commit();
+    } catch (IllegalStateException e) {
+      Log.e(TAG, "Error instantiating fragment", e);
+    }
   }
 
   @Override

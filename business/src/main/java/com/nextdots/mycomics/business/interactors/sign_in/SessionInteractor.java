@@ -46,7 +46,7 @@ public interface SessionInteractor {
    * @param callback
    *         Callback to return the results
    */
-  void logOutUser(@NonNull LogOutCallback callback);
+  void signOutUser(@NonNull SignOutCallback callback);
 
   /**
    * Callback used to return the result of the sign in operation
@@ -68,22 +68,22 @@ public interface SessionInteractor {
   }
 
   /**
-   * Callback used to return the result of the log out operation
+   * Callback used to return the result of the sign out operation
    */
-  interface LogOutCallback {
+  interface SignOutCallback {
 
     /**
      * Called when user has been successfully logged out
      */
-    void onLogOutSuccess();
+    void onSignOutSuccess();
 
     /**
-     * Called when log out process has failed
+     * Called when sign out process has failed
      *
      * @param e
      *         Exception with information about the failure and a message to the user
      */
-    void onLogOutFailure(MyComicsException e);
+    void onSignOutFailure(MyComicsException e);
   }
 
 }
