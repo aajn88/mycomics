@@ -76,11 +76,25 @@ public class ComicsListPresenter extends AbstractPresenter
   @Override
   public void onComicsSuccess(@NonNull List<Comic> comics, @NonNull PageInfo pageInfo) {
     if (pageInfo.getCurrentPage() == STARTING_PAGE) {
-      mComicsListView.showComicsList(comics);
+      replaceComicsList(comics);
     } else {
       mComicsListView.addComicsList(comics);
     }
     mComicsListView.showLoading(false);
+  }
+
+  /**
+   * Replaces the existing comics list
+   *
+   * @param comics
+   *         Comics list to be shown
+   */
+  private void replaceComicsList(@NonNull List<Comic> comics) {
+    if (comics.isEmpty()) {
+      mComicsListView.showEmptyComicsListMessage();
+    } else {
+      mComicsListView.showComicsList(comics);
+    }
   }
 
   @Override

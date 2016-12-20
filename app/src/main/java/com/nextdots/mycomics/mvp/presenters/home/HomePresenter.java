@@ -77,4 +77,11 @@ public class HomePresenter extends AbstractPresenter implements SessionInteracto
   public void onSignOutFailure(MyComicsException e) {
     mHomeView.handleException(e);
   }
+
+  /**
+   * Called when back button is pressed
+   */
+  public void onBackPressed() {
+    mHomeView.closeApp();
+  }
 }

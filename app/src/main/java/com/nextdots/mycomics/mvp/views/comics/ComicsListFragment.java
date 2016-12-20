@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.business.exceptions.MyComicsException;
@@ -29,6 +30,7 @@ import com.pedrogomez.renderers.RVRendererAdapter;
 import com.pedrogomez.renderers.RendererBuilder;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -65,6 +67,10 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @BindView(R.id.progress_bar)
   ProgressBar mProgressBar;
 
+  /** No items message TextView **/
+  @BindView(R.id.no_items_message_tv)
+  TextView mNoItemsMessageTv;
+
   /** Comics interactor **/
   @Inject
   ComicsInteractor mComicsInteractor;
@@ -77,6 +83,9 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
 
   /** Is favorites list **/
   private boolean mIsFavoritesList;
+
+  /** UUID for this fragment **/
+  private final String mUuid = UUID.randomUUID().toString();
 
   public ComicsListFragment() {
     // Required empty public constructor
@@ -168,16 +177,14 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
 
   @Override
   public String key() {
-    return super.key() + mIsFavoritesList;
+    return mUuid;
   }
 
   @Override
   public void showComicsList(@NonNull List<Comic> comics) {
     Log.d(TAG, "Comics to be displayed: " + comics);
-    if (!isAdded()) {
-      return;
-    }
 
+    showEmptyMessage(false);
     ComicRenderer renderer = new ComicRenderer(getPresenter());
     RendererBuilder<Comic> builder = new RendererBuilder<>(renderer);
     mAdapter = new RVRendererAdapter<>(builder, new ListAdapteeCollection<>(comics));
@@ -187,6 +194,23 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @Override
   public void addComicsList(@NonNull List<Comic> comics) {
     // TODO
+  }
+
+  @Override
+  public void showEmptyComicsListMessage() {
+    showEmptyMessage(true);
+    mNoItemsMessageTv.setText(mIsFavoritesList ? R.string.no_favorite_comics : R.string.no_comics);
+  }
+
+  /**
+   * Shows/hides empty message and related views (comics Recycler View)
+   *
+   * @param show
+   *         Shows/hides
+   */
+  private void showEmptyMessage(boolean show) {
+    mNoItemsMessageTv.setVisibility(show ? View.VISIBLE : View.GONE);
+    mComicsRv.setVisibility(!show ? View.VISIBLE : View.GONE);
   }
 
 }
