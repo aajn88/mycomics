@@ -35,6 +35,32 @@ public interface ComicsInteractor {
   void getFavoriteComics(@NonNull ComicsCallback comicsCallback);
 
   /**
+   * Checks if the given comic ID owns a favorite comic
+   *
+   * @param comicId
+   *         Target comic ID
+   *
+   * @return True if it's a favorite comic. Otherwise returns false
+   */
+  boolean isFavoriteComic(int comicId);
+
+  /**
+   * Saves favorite comic
+   *
+   * @param comic
+   *         Comic to be saved as a favorite
+   */
+  void saveFavorite(Comic comic);
+
+  /**
+   * Removes a comic from favorites
+   *
+   * @param comicId
+   *         Comic to be removed
+   */
+  void removeFavorite(int comicId);
+
+  /**
    * Comics callback to return the results
    */
   interface ComicsCallback {

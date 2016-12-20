@@ -1,5 +1,9 @@
 package com.nextdots.mycomics.common.model.comics;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.nextdots.mycomics.common.persistence_types.CollectionType;
+
 import java.util.List;
 
 /**
@@ -11,25 +15,28 @@ import java.util.List;
 public class Comic {
 
   /** Comic's ID **/
+  @DatabaseField(id = true)
   private Integer id;
 
   /** Comic's title **/
+  @DatabaseField(canBeNull = false)
   private String title;
 
   /** Description **/
+  @DatabaseField
   private String description;
 
   /** Comic's thumbnail **/
+  @DatabaseField(dataType = DataType.SERIALIZABLE)
   private Image thumbnail;
 
   /** Comic's images **/
+  @DatabaseField(persisterClass = CollectionType.class)
   private List<Image> images;
 
   /** List of available prices **/
+  @DatabaseField(persisterClass = CollectionType.class)
   private List<Price> prices;
-
-  /** Is favorite comic **/
-  private boolean isFavorite;
 
   /**
    * @return the id
@@ -122,13 +129,6 @@ public class Comic {
   }
 
   /**
-   * @return the isFavorite
-   */
-  public boolean isFavorite() {
-    return isFavorite;
-  }
-
-  /**
    * @param isFavorite
    *         the isFavorite to set
    */
@@ -139,8 +139,7 @@ public class Comic {
   @Override
   public String toString() {
     return "Comic{" +
-            "isFavorite=" + isFavorite +
-            ", id=" + id +
+            "id=" + id +
             ", title='" + title + '\'' +
             ", description='" + description + '\'' +
             ", thumbnail=" + thumbnail +

@@ -7,6 +7,7 @@ import com.nextdots.mycomics.business.interactors.sign_in.SessionInteractorImpl;
 import com.nextdots.mycomics.business.providers.sign_in.facebook.FacebookProvider;
 import com.nextdots.mycomics.business.providers.sign_in.google.GoogleProvider;
 import com.nextdots.mycomics.communication.api.commics.ComicsApi;
+import com.nextdots.mycomics.persistence.managers.comics.ComicsManager;
 import com.nextdots.mycomics.persistence.managers.session.UsersManager;
 
 import javax.inject.Singleton;
@@ -46,6 +47,8 @@ public class InteractorsModule {
   /**
    * Provides a {@link ComicsInteractor} instance
    *
+   * @param comicsManager
+   *         Comics manager
    * @param comicsApi
    *         Comics API instance
    *
@@ -53,8 +56,9 @@ public class InteractorsModule {
    */
   @Provides
   @Singleton
-  public ComicsInteractor provideComicsInteractor(ComicsApi comicsApi) {
-    return new ComicsInteractorImpl(comicsApi);
+  public ComicsInteractor provideComicsInteractor(ComicsManager comicsManager,
+                                                  ComicsApi comicsApi) {
+    return new ComicsInteractorImpl(comicsManager, comicsApi);
   }
 
 }

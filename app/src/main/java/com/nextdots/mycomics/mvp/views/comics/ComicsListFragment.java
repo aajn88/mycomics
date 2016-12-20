@@ -178,7 +178,7 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
       return;
     }
 
-    ComicRenderer renderer = new ComicRenderer();
+    ComicRenderer renderer = new ComicRenderer(getPresenter());
     RendererBuilder<Comic> builder = new RendererBuilder<>(renderer);
     mAdapter = new RVRendererAdapter<>(builder, new ListAdapteeCollection<>(comics));
     mComicsRv.setAdapter(mAdapter);
@@ -188,4 +188,5 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   public void addComicsList(@NonNull List<Comic> comics) {
     // TODO
   }
+
 }

@@ -88,4 +88,36 @@ public class ComicsListPresenter extends AbstractPresenter
     mComicsListView.showLoading(false);
     mComicsListView.handleException(e);
   }
+
+  /**
+   * Checks if the given comic is favorite
+   *
+   * @param comic
+   *         Comic to be checked
+   *
+   * @return True if is a favorite comic. False otherwise
+   */
+  public boolean isFavoriteComic(@NonNull Comic comic) {
+    return mComicsInteractor.isFavoriteComic(comic.getId());
+  }
+
+  /**
+   * Saves favorite comic
+   *
+   * @param comic
+   *         Comic to be saved as a favorite
+   */
+  public void saveFavorite(@NonNull Comic comic) {
+    mComicsInteractor.saveFavorite(comic);
+  }
+
+  /**
+   * Removes a comic from favorites
+   *
+   * @param comic
+   *         Comic to be removed
+   */
+  public void removeFavorite(@NonNull Comic comic) {
+    mComicsInteractor.removeFavorite(comic.getId());
+  }
 }
