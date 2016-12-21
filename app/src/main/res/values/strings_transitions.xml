@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <!-- Transition names -->
+  <string name="logo_transition">logo_transition</string>
+  <string name="image_transition">image_transition</string>
+  <string name="container_transition">container_transition</string>
+  <string name="title_transition">title_transition</string>
+
+</resources>

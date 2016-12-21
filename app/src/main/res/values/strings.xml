@@ -19,9 +19,6 @@
   <string name="action_settings">Settings</string>
   <string name="log_out">log_out</string>
 
-  <!-- Transition names -->
-  <string name="logo_transition">logo_transition</string>
-
   <!-- Sign in activity -->
   <string name="facebook_sign_in">Sign in with facebook</string>
   <string name="title_activity_home">HomeActivity</string>
@@ -35,5 +32,7 @@
   <string name="comic_title">Comic title</string>
   <string name="comic_price">$4.5</string>
   <string name="sold_out">SOLD OUT!</string>
+  <string name="comic_description">A CLONE CONSPIRACY TIE-IN! Gwen Stacy is back in the land of the living and in league with The Jackal. But why? She’s not evil. She’s not being mind-controlled. What would push the one of the most beloved characters in Marvel history to join one of Spider-Man’s worst villains?!</string>
+  <string name="created_by">Created by:</string>
 
 </resources>

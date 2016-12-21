@@ -45,6 +45,8 @@
       android:label="@string/title_activity_home"
       android:theme="@style/AppTheme">
     </activity>
+    <activity android:name=".mvp.views.comics.ComicDetailActivity">
+    </activity>
   </application>
 
 </manifest>

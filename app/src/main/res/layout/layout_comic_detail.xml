@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/comic_container"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_marginBottom="@dimen/condensedVerticalMargin"
+  android:layout_marginEnd="@dimen/standardHorizontalMargin"
+  android:layout_marginStart="@dimen/standardHorizontalMargin"
+  android:layout_marginTop="@dimen/condensedVerticalMargin"
+  android:transitionName="@string/container_transition">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/condensedVerticalMargin"
+    android:paddingLeft="@dimen/standardHorizontalMargin"
+    android:paddingRight="@dimen/standardHorizontalMargin"
+    android:paddingTop="@dimen/condensedVerticalMargin">
+
+    <RelativeLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/selectableItemBackground"
+      tools:ignore="UselessParent">
+
+      <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/comic_logo_iv"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
+        android:contentDescription="@string/comic_logo"
+        android:scaleType="fitXY"
+        android:src="@color/material_grey_500"
+        android:transitionName="@string/image_transition"
+        app:siBorderAlpha="0.0"
+        app:siRadius="6dp"
+        app:siSquare="true"/>
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/comic_logo_iv"
+        android:layout_toStartOf="@+id/favorite_iv"
+        android:orientation="vertical">
+
+        <com.nextdots.mycomics.custom_views.font.RobotoTextView
+          android:id="@+id/comic_title_tv"
+          style="@style/TitleStyle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/comic_title"
+          android:transitionName="@string/title_transition"/>
+
+        <com.nextdots.mycomics.custom_views.font.RobotoTextView
+          android:id="@+id/comic_price_tv"
+          style="@style/Body2Style"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/comic_price"
+          android:textColor="@color/material_green_500"/>
+
+      </LinearLayout>
+
+      <ImageView
+        android:id="@+id/favorite_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/favorite_mark"
+        android:padding="@dimen/condensedHorizontalMargin"
+        android:src="@drawable/ic_favorite_black_12"
+        android:visibility="gone"/>
+
+      <com.nextdots.mycomics.custom_views.font.RobotoTextView
+        android:id="@+id/on_sale_date_tv"
+        style="@style/CaptionStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:text="01/05/16"
+        android:textColor="?thirdLightAlpha"/>
+
+    </RelativeLayout>
+
+    <com.nextdots.mycomics.custom_views.font.RobotoTextView
+      android:id="@+id/description_tv"
+      style="@style/CaptionStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="@dimen/condensedVerticalMargin"
+      android:paddingTop="@dimen/standardVerticalMargin"
+      android:text="@string/comic_description"
+      android:textColor="?attr/secondaryLightAlpha"/>
+
+    <com.nextdots.mycomics.custom_views.font.RobotoTextView
+      android:id="@+id/created_by_tv"
+      style="@style/CaptionStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="@dimen/standardVerticalMargin"
+      android:text="@string/created_by"/>
+
+    <com.nextdots.mycomics.custom_views.font.RobotoTextView
+      android:id="@+id/creators_tv"
+      style="@style/CaptionStyle"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="@dimen/condensedVerticalMargin"
+      android:text="Creator1, Creator2, Creator3"
+      android:textColor="?attr/secondaryLightAlpha"/>
+
+  </LinearLayout>
+</android.support.v7.widget.CardView>

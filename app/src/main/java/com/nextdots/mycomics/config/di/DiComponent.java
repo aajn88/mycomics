@@ -5,6 +5,7 @@ import com.nextdots.mycomics.config.di.modules.CommunicationModule;
 import com.nextdots.mycomics.config.di.modules.InteractorsModule;
 import com.nextdots.mycomics.config.di.modules.PersistenceModule;
 import com.nextdots.mycomics.config.di.modules.ProvidersModule;
+import com.nextdots.mycomics.mvp.views.comics.ComicDetailActivity;
 import com.nextdots.mycomics.mvp.views.comics.ComicsListFragment;
 import com.nextdots.mycomics.mvp.views.home.HomeActivity;
 import com.nextdots.mycomics.mvp.views.launch.MainActivity;
@@ -35,4 +36,7 @@ public interface DiComponent {
 
   /** Comics list fragment **/
   void inject(ComicsListFragment comicsListFragment);
+
+  /** Comic detail activity **/
+  void inject(ComicDetailActivity comicDetailActivity);
 }

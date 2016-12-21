@@ -4,6 +4,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.nextdots.mycomics.common.persistence_types.CollectionType;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * @author <a href="mailto:aajn88@gmail.com">Antonio Jimenez</a>
  * @since 18/12/16
  */
-public class Comic {
+public class Comic implements Serializable {
 
   /** Comic's ID **/
   @DatabaseField(id = true)
@@ -34,9 +35,21 @@ public class Comic {
   @DatabaseField(persisterClass = CollectionType.class)
   private List<Image> images;
 
+  /** List of dates **/
+  @DatabaseField(persisterClass = CollectionType.class)
+  private List<ComicDate> dates;
+
   /** List of available prices **/
   @DatabaseField(persisterClass = CollectionType.class)
   private List<Price> prices;
+
+  /** Page count **/
+  @DatabaseField(canBeNull = false)
+  private Integer pageCount;
+
+  /** Comic creators **/
+  @DatabaseField(dataType = DataType.SERIALIZABLE)
+  private CreatorsList creatorsList;
 
   /**
    * @return the id
@@ -114,6 +127,21 @@ public class Comic {
   }
 
   /**
+   * @return the dates
+   */
+  public List<ComicDate> getDates() {
+    return dates;
+  }
+
+  /**
+   * @param dates
+   *         the dates to set
+   */
+  public void setDates(List<ComicDate> dates) {
+    this.dates = dates;
+  }
+
+  /**
    * @return the prices
    */
   public List<Price> getPrices() {
@@ -129,11 +157,33 @@ public class Comic {
   }
 
   /**
-   * @param isFavorite
-   *         the isFavorite to set
+   * @return the pageCount
    */
-  public void setFavorite(boolean isFavorite) {
-    isFavorite = isFavorite;
+  public Integer getPageCount() {
+    return pageCount;
+  }
+
+  /**
+   * @param pageCount
+   *         the pageCount to set
+   */
+  public void setPageCount(Integer pageCount) {
+    this.pageCount = pageCount;
+  }
+
+  /**
+   * @return the creatorsList
+   */
+  public CreatorsList getCreatorsList() {
+    return creatorsList;
+  }
+
+  /**
+   * @param creatorsList
+   *         the creatorsList to set
+   */
+  public void setCreatorsList(CreatorsList creatorsList) {
+    this.creatorsList = creatorsList;
   }
 
   @Override
@@ -144,7 +194,10 @@ public class Comic {
             ", description='" + description + '\'' +
             ", thumbnail=" + thumbnail +
             ", images=" + images +
+            ", dates=" + dates +
             ", prices=" + prices +
+            ", pageCount=" + pageCount +
+            ", creatorsList=" + creatorsList +
             '}';
   }
 }
