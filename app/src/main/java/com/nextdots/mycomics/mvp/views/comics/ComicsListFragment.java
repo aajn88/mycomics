@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -71,6 +74,9 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   @BindView(R.id.no_items_message_tv)
   TextView mNoItemsMessageTv;
 
+  /** Menu **/
+  private Menu mMenu;
+
   /** Comics interactor **/
   @Inject
   ComicsInteractor mComicsInteractor;
@@ -119,7 +125,9 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
     // Inflate the layout for this fragment
-    return inflater.inflate(R.layout.fragment_comics_list, container, false);
+    View view = inflater.inflate(R.layout.fragment_comics_list, container, false);
+    setHasOptionsMenu(!mIsFavoritesList);
+    return view;
   }
 
   @Override
@@ -131,6 +139,25 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
     mComicsRv.setLayoutManager(new LinearLayoutManager(getActivity()));
     setTitle();
     getPresenter().start();
+  }
+
+  @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    mMenu = menu;
+    if (mIsFavoritesList) {
+      return;
+    }
+    inflater.inflate(R.menu.menu_comics_list, mMenu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.add_item:
+        getPresenter().requestsNextPage();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
   }
 
   /**
@@ -167,7 +194,24 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
 
   @Override
   public void showLoading(boolean show) {
+    enableOptions(!show);
     mProgressBar.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
+  }
+
+  /**
+   * Enables/disables toolbar options
+   *
+   * @param enable
+   *         Enable/disable
+   */
+  private void enableOptions(boolean enable) {
+    if (mMenu == null) {
+      return;
+    }
+    int size = mMenu.size();
+    for (int i = 0; i < size; i++) {
+      mMenu.getItem(i).setEnabled(enable);
+    }
   }
 
   @Override
@@ -193,7 +237,11 @@ public class ComicsListFragment extends BaseFragment<ComicsListPresenter>
 
   @Override
   public void addComicsList(@NonNull List<Comic> comics) {
-    // TODO
+    int currentSize = mAdapter.getItemCount();
+    mAdapter.addAll(comics);
+    int addedComicsSize = comics.size();
+    mAdapter.notifyItemRangeInserted(currentSize, addedComicsSize);
+    mComicsRv.smoothScrollToPosition(currentSize);
   }
 
   @Override

@@ -64,7 +64,8 @@ public class ComicsListPresenter extends AbstractPresenter
   /**
    * Requests the next page of comics
    */
-  private void requestsNextPage() {
+  public void requestsNextPage() {
+    mComicsListView.showLoading(true);
     mComicsInteractor.getComics(mCurrentPage++, this);
   }
 

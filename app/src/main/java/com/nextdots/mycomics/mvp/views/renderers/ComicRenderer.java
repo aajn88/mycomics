@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.common.model.comics.Comic;
+import com.nextdots.mycomics.common.model.comics.Image;
 import com.nextdots.mycomics.common.model.comics.Price;
 import com.nextdots.mycomics.mvp.presenters.comics.ComicsListPresenter;
 import com.nextdots.mycomics.utils.ImageUtils;
@@ -30,6 +31,9 @@ public class ComicRenderer extends BaseRenderer<Comic> {
 
   /** Print price value **/
   private static final String PRINT_PRICE_TYPE = "printPrice";
+
+  /** Standard small image **/
+  private static final String STANDARD_MEDIUM_IMAGE = "standard_medium";
 
   /** Comic logo **/
   @BindView(R.id.comic_logo_iv)
@@ -97,7 +101,19 @@ public class ComicRenderer extends BaseRenderer<Comic> {
    *         The comic
    */
   private void renderLogo(Comic comic) {
-    ImageUtils.displayImage(mComicLogoIv, comic.getThumbnail().getPath(), null);
+    ImageUtils.displayImage(mComicLogoIv, buildImageUrl(comic.getThumbnail()), null);
+  }
+
+  /**
+   * Builds the image URL to correctly access it
+   *
+   * @param image
+   *         Image to be accessed
+   *
+   * @return The well-formed image URL
+   */
+  private String buildImageUrl(Image image) {
+    return image.getPath() + "/" + STANDARD_MEDIUM_IMAGE + "." + image.getExtension();
   }
 
   /**
