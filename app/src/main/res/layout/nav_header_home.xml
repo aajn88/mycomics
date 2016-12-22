@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="@dimen/nav_header_height"
+  android:background="@drawable/side_nav_bar"
+  android:gravity="bottom"
+  android:orientation="vertical"
+  android:paddingBottom="@dimen/activity_vertical_margin"
+  android:paddingLeft="@dimen/activity_horizontal_margin"
+  android:paddingRight="@dimen/activity_horizontal_margin"
+  android:paddingTop="@dimen/extendedVerticalMargin"
+  android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+  <com.github.siyamed.shapeimageview.CircularImageView
+    android:id="@+id/user_avatar_iv"
+    android:layout_width="68dp"
+    android:layout_height="68dp"
+    android:layout_marginTop="@dimen/extendedVerticalMargin"
+    android:contentDescription="@string/user_avatar"
+    android:src="@android:drawable/sym_def_app_icon"
+    app:siBorderAlpha="0.0"/>
+
+  <com.nextdots.mycomics.custom_views.font.RobotoTextView
+    android:id="@+id/user_name_tv"
+    style="@style/Body1Style"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/nav_header_vertical_spacing"
+    android:text="@string/user_name"
+    android:textColor="@color/white"/>
+
+  <TextView
+    android:id="@+id/user_email_tv"
+    style="@style/CaptionStyle"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/user_email"
+    android:textColor="@color/white_70_percent"/>
+
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <string name="no_internet_connection">No internet connection</string>
+  <string name="error_signing_in">Couldn\'t sign in</string>
+  <string name="error_signing_out">Couldn\'t sign out</string>
+  <string name="error_loading_comics">Error loading comics</string>
+
+</resources>

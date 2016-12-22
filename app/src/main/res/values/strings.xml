@@ -1,3 +1,38 @@
 <resources>
   <string name="app_name">My Comics</string>
+
+  <!-- Images description -->
+  <string name="logo_description">My comics logo</string>
+  <string name="comic_logo">Comic\'s logo</string>
+  <string name="favorite_mark">Favorite mark</string>
+  <string name="user_avatar">User\'s avatar</string>
+
+  <!-- Drawer -->
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="user_name">User\'s name</string>
+  <string name="user_email">user@email.com</string>
+
+  <!-- Navigation options -->
+  <string name="my_comics">My comics</string>
+  <string name="my_favorites">My favorites</string>
+  <string name="action_settings">Settings</string>
+  <string name="log_out">log_out</string>
+
+  <!-- Sign in activity -->
+  <string name="facebook_sign_in">Sign in with facebook</string>
+  <string name="title_activity_home">HomeActivity</string>
+
+  <!-- Comics list -->
+  <string name="no_comics">There are no comics! :(</string>
+  <string name="no_favorite_comics">You don\'t have favorite comics! &lt;/3</string>
+  <string name="add_comics">Add comics</string>
+
+  <!-- Comic item -->
+  <string name="comic_title">Comic title</string>
+  <string name="comic_price">$4.5</string>
+  <string name="sold_out">SOLD OUT!</string>
+  <string name="comic_description">A CLONE CONSPIRACY TIE-IN! Gwen Stacy is back in the land of the living and in league with The Jackal. But why? She’s not evil. She’s not being mind-controlled. What would push the one of the most beloved characters in Marvel history to join one of Spider-Man’s worst villains?!</string>
+  <string name="created_by">Created by:</string>
+
 </resources>

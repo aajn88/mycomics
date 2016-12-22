@@ -33,3 +33,6 @@ build/
 wrapper/
 gradlew
 gradlew.bat
+
+# My comics
+facebook_app_id.xml

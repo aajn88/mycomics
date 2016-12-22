@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/nav_my_comics"
+      android:icon="@drawable/ic_movies"
+      android:title="@string/my_comics"/>
+    <item
+      android:id="@+id/nav_my_favorites"
+      android:icon="@drawable/ic_favorite_black"
+      android:title="@string/my_favorites"/>
+  </group>
+
+  <item android:title="@string/action_settings">
+    <menu>
+      <item
+        android:id="@+id/nav_log_out"
+        android:icon="@drawable/ic_power"
+        android:title="@string/log_out"/>
+    </menu>
+  </item>
+
+</menu>

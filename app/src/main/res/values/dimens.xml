@@ -1,5 +1,21 @@
 <resources>
+
   <!-- Default screen margins, per the Android Design guidelines. -->
   <dimen name="activity_horizontal_margin">16dp</dimen>
   <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="extraThinVerticalMargin">2dp</dimen>
+  <dimen name="extraThinHorizontalMargin">2dp</dimen>
+  <dimen name="thinVerticalMargin">4dp</dimen>
+  <dimen name="thinHorizontalMargin">4dp</dimen>
+  <dimen name="condensedHorizontalMargin">8dp</dimen>
+  <dimen name="condensedVerticalMargin">8dp</dimen>
+  <dimen name="standardHorizontalMargin">16dp</dimen>
+  <dimen name="standardVerticalMargin">16dp</dimen>
+  <dimen name="extendedVerticalMargin">24dp</dimen>
+  <dimen name="extendedHorizontalMargin">24dp</dimen>
+  <!-- Default screen margins, per the Android Design guidelines. -->
+  <dimen name="nav_header_vertical_spacing">16dp</dimen>
+  <dimen name="nav_header_height">190dp</dimen>
+  <dimen name="fab_margin">16dp</dimen>
+
 </resources>

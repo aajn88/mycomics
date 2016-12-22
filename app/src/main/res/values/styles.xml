@@ -1,11 +1,26 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <item name="primaryLightAlpha">@color/black_87_percent</item>
+    <item name="secondaryLightAlpha">@color/black_54_percent</item>
+    <item name="thirdLightAlpha">@color/black_38_percent</item>
+    <item name="dividerLightAlpha">@color/black_12_percent</item>
+    <item name="android:windowBackground">@color/material_grey_300</item>
   </style>
+
+  <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+    <item name="android:textColorPrimary">@color/white</item>
+    <item name="android:textColorSecondary">@color/white_70_percent</item>
+  </style>
+
+  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 </resources>
