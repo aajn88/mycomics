@@ -1,4 +1,4 @@
-package com.nextdots.mycomics.mvp.presenters.comics;
+package com.nextdots.mycomics.mvp.presenters.comics.list;
 
 import android.support.annotation.NonNull;
 

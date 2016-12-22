@@ -9,7 +9,8 @@
   android:layout_marginBottom="@dimen/condensedVerticalMargin"
   android:layout_marginEnd="@dimen/standardHorizontalMargin"
   android:layout_marginStart="@dimen/standardHorizontalMargin"
-  android:layout_marginTop="@dimen/condensedVerticalMargin">
+  android:layout_marginTop="@dimen/condensedVerticalMargin"
+  android:transitionName="@string/container_transition">
 
   <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -34,6 +35,7 @@
       android:contentDescription="@string/comic_logo"
       android:scaleType="fitXY"
       android:src="@color/material_grey_500"
+      android:transitionName="@string/image_transition"
       app:siBorderAlpha="0.0"
       app:siRadius="6dp"
       app:siSquare="true"/>
@@ -51,7 +53,8 @@
         style="@style/Body2Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/comic_title"/>
+        android:text="@string/comic_title"
+        android:transitionName="@string/title_transition"/>
 
       <com.nextdots.mycomics.custom_views.font.RobotoTextView
         android:id="@+id/comic_price_tv"

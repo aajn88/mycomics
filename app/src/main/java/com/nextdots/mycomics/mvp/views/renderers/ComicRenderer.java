@@ -1,5 +1,6 @@
 package com.nextdots.mycomics.mvp.views.renderers;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,8 @@ import com.nextdots.mycomics.R;
 import com.nextdots.mycomics.common.model.comics.Comic;
 import com.nextdots.mycomics.common.model.comics.Image;
 import com.nextdots.mycomics.common.model.comics.Price;
-import com.nextdots.mycomics.mvp.presenters.comics.ComicsListPresenter;
+import com.nextdots.mycomics.mvp.presenters.comics.list.ComicsListPresenter;
+import com.nextdots.mycomics.mvp.views.comics.ComicDetailActivity;
 import com.nextdots.mycomics.utils.ImageUtils;
 import com.nextdots.mycomics.utils.ViewUtils;
 
@@ -35,6 +37,10 @@ public class ComicRenderer extends BaseRenderer<Comic> {
   /** Standard small image **/
   private static final String STANDARD_MEDIUM_IMAGE = "standard_medium";
 
+  /** Comic container **/
+  @BindView(R.id.comic_container)
+  ViewGroup mComicContainer;
+
   /** Comic logo **/
   @BindView(R.id.comic_logo_iv)
   ImageView mComicLogoIv;
@@ -51,6 +57,9 @@ public class ComicRenderer extends BaseRenderer<Comic> {
   @BindView(R.id.favorite_iv)
   ImageView mFavoriteMarkIv;
 
+  /** Comic view **/
+  private View mComicView;
+
   /** Comics list presenter **/
   private final ComicsListPresenter mComicsListPresenter;
 
@@ -61,13 +70,37 @@ public class ComicRenderer extends BaseRenderer<Comic> {
    *         Comics list presenter
    */
   public ComicRenderer(ComicsListPresenter comicsListPresenter) {
+    this(comicsListPresenter, null);
+  }
+
+  /**
+   * Comic renderer constructor for an existing view
+   *
+   * @param comicView
+   *         Created comic view
+   */
+  public ComicRenderer(View comicView) {
+    this(null, comicView);
+  }
+
+  /**
+   * Comic renderer constructor for an existing view
+   *
+   * @param comicsListPresenter
+   *         Comics list presenter
+   * @param comicView
+   *         Created comic view
+   */
+  public ComicRenderer(ComicsListPresenter comicsListPresenter, View comicView) {
     this.mComicsListPresenter = comicsListPresenter;
+    this.mComicView = comicView;
   }
 
   @NonNull
   @Override
   protected View inflateView(LayoutInflater inflater, ViewGroup parent) {
-    return inflater.inflate(R.layout.layout_item_comic, parent, false);
+    return mComicView != null ? mComicView :
+            inflater.inflate(R.layout.layout_item_comic, parent, false);
   }
 
   @Override
@@ -80,10 +113,22 @@ public class ComicRenderer extends BaseRenderer<Comic> {
   }
 
   /**
+   * Called when the user has clicked the comic
+   */
+  @OnClick(R.id.comic_container)
+  public void onClickComic() {
+    ComicDetailActivity.start((Activity) getContext(), getContent(), mComicContainer, mComicLogoIv,
+            mComicTitleTv);
+  }
+
+  /**
    * Called when favorite icon is clicked
    */
   @OnClick(R.id.favorite_iv)
   public void onClickFavorite() {
+    if (mComicsListPresenter == null) {
+      return;
+    }
     Comic comic = getContent();
     boolean addFavorite = !mComicsListPresenter.isFavoriteComic(comic);
     if (addFavorite) {
@@ -159,6 +204,9 @@ public class ComicRenderer extends BaseRenderer<Comic> {
    *         The comic
    */
   protected void renderFavorite(Comic comic) {
+    if (mComicsListPresenter == null) {
+      return;
+    }
     boolean isFavorite = mComicsListPresenter.isFavoriteComic(comic);
     int favoriteDrawable =
             isFavorite ? R.drawable.ic_favorite_red_light : R.drawable.ic_favorite_black_12;
