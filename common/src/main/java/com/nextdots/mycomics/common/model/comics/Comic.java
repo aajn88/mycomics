@@ -49,7 +49,7 @@ public class Comic implements Serializable {
 
   /** Comic creators **/
   @DatabaseField(dataType = DataType.SERIALIZABLE)
-  private CreatorsList creatorsList;
+  private CreatorsList creators;
 
   /**
    * @return the id
@@ -172,18 +172,18 @@ public class Comic implements Serializable {
   }
 
   /**
-   * @return the creatorsList
+   * @return the creators
    */
-  public CreatorsList getCreatorsList() {
-    return creatorsList;
+  public CreatorsList getCreators() {
+    return creators;
   }
 
   /**
-   * @param creatorsList
-   *         the creatorsList to set
+   * @param creators
+   *         the creators to set
    */
-  public void setCreatorsList(CreatorsList creatorsList) {
-    this.creatorsList = creatorsList;
+  public void setCreators(CreatorsList creators) {
+    this.creators = creators;
   }
 
   @Override
@@ -197,7 +197,7 @@ public class Comic implements Serializable {
             ", dates=" + dates +
             ", prices=" + prices +
             ", pageCount=" + pageCount +
-            ", creatorsList=" + creatorsList +
+            ", creators=" + creators +
             '}';
   }
 }

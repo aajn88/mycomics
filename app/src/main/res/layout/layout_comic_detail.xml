@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/comic_logo_iv"
-        android:layout_toStartOf="@+id/favorite_iv"
+        android:layout_toStartOf="@+id/on_sale_date_tv"
         android:orientation="vertical">
 
         <com.nextdots.mycomics.custom_views.font.RobotoTextView

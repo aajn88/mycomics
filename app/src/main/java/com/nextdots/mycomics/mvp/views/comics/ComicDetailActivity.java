@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.Pair;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -32,6 +33,10 @@ public class ComicDetailActivity extends BaseActivity<ComicDetailPresenter>
   /** Comics interactor **/
   @Inject
   ComicsInteractor mComicsInteractor;
+
+  /** Toolbar **/
+  @BindView(R.id.toolbar)
+  Toolbar mToolbar;
 
   /** Main comics container **/
   @BindView(R.id.comics_container)
@@ -80,6 +85,17 @@ public class ComicDetailActivity extends BaseActivity<ComicDetailPresenter>
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_comic_detail);
     Comic comic = (Comic) getIntent().getSerializableExtra(COMIC_EXTRA);
+
+    setSupportActionBar(mToolbar);
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    getSupportActionBar().setDisplayShowHomeEnabled(true);
+    mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        onBackPressed();
+      }
+    });
+
     getPresenter().start(comic);
   }
 
